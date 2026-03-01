@@ -27,7 +27,11 @@ final class Base {
     public function init() {
 
         // Load textdomain
-        load_plugin_textdomain( 'exsit-addons', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+        load_plugin_textdomain(
+            'exsit-addons',
+            false,
+            dirname( plugin_basename( __FILE__ ) ) . '/languages'
+        );
 
         // Load Codestar Framework
         if ( defined( 'EXSIT_HELPER_INC' ) && file_exists( EXSIT_HELPER_INC . 'codestar-framework/codestar-framework.php' ) ) {
@@ -38,24 +42,71 @@ final class Base {
         if ( defined( 'EXSIT_HELPER_INC' ) && file_exists( EXSIT_HELPER_INC . 'option/settings-init.php' ) ) {
             require_once EXSIT_HELPER_INC . 'option/settings-init.php';
         }
+
+        // Elementor Integration
+        if ( did_action( 'elementor/loaded' ) ) {
+
+            add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
+            add_action( 'elementor/elements/categories_registered', [ $this, 'register_widget_category' ] );
+
+        }
     }
 
     /**
-     * Register parent menu for Theme Settings (optional)
+     * Register Elementor Widgets
+     */
+    public function register_widgets( $widgets_manager ) {
+
+        // Team Member Widget
+        if ( file_exists( EXSIT_HELPER_PATH . 'widgets/team-member.php' ) ) {
+            require_once EXSIT_HELPER_PATH . 'widgets/team-member.php';
+            $widgets_manager->register( new \Exsit_Team_Member_Widget() );
+        }
+
+    }
+
+    /**
+     * Register Elementor Widget Category
+     */
+    public function register_widget_category( $elements_manager ) {
+
+        $elements_manager->add_category(
+            'exsit',
+            [
+                'title' => __( 'Exsit Widgets', 'exsit-addons' ),
+                'icon'  => 'fa fa-plug',
+            ]
+        );
+
+    }
+
+    /**
+     * Register parent menu
      */
     public function register_theme_admin_menu() {
+
         add_menu_page(
             esc_html__( 'Exsit Theme', 'exsit-addons' ),
             esc_html__( 'Exsit Theme', 'exsit-addons' ),
             'manage_options',
             'exsit-theme-parent',
             [ $this, 'render_dashboard' ],
-            'dashicons-dashboard', 
+            'dashicons-dashboard',
             30
         );
+
     }
 
+    /**
+     * Dashboard Page
+     */
     public function render_dashboard() {
-        echo '<div class="wrap"><h1>' . esc_html__( 'Welcome to Exsit Theme', 'exsit-addons' ) . '</h1></div>';
+
+        echo '<div class="wrap">';
+        echo '<h1>' . esc_html__( 'Welcome to Exsit Theme', 'exsit-addons' ) . '</h1>';
+        echo '<p>' . esc_html__( 'Use the Theme Settings to configure your site.', 'exsit-addons' ) . '</p>';
+        echo '</div>';
+
     }
+
 }
