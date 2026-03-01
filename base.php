@@ -43,11 +43,17 @@ final class Base {
             require_once EXSIT_HELPER_INC . 'option/settings-init.php';
         }
 
-        // Elementor Integration
+        /**
+         * Elementor Integration
+         */
         if ( did_action( 'elementor/loaded' ) ) {
 
             add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
-            add_action( 'elementor/elements/categories_registered', [ $this, 'register_widget_category' ] );
+
+            add_action(
+                'elementor/elements/categories_registered',
+                [ $this, 'register_widget_category' ]
+            );
 
         }
     }
@@ -58,11 +64,16 @@ final class Base {
     public function register_widgets( $widgets_manager ) {
 
         // Team Member Widget
-        if ( file_exists( EXSIT_HELPER_PATH . 'widgets/team-member.php' ) ) {
-            require_once EXSIT_HELPER_PATH . 'widgets/team-member.php';
-            $widgets_manager->register( new \Exsit_Team_Member_Widget() );
-        }
+        $widget_file = EXSIT_HELPER_PATH . 'widgets/team-member.php';
 
+        if ( file_exists( $widget_file ) ) {
+
+            require_once $widget_file;
+
+            $widgets_manager->register(
+                new \Exsit_Team_Member_Widget()
+            );
+        }
     }
 
     /**
@@ -71,9 +82,9 @@ final class Base {
     public function register_widget_category( $elements_manager ) {
 
         $elements_manager->add_category(
-            'exsit',
+            'exsit-addons',
             [
-                'title' => __( 'Exsit Widgets', 'exsit-addons' ),
+                'title' => esc_html__( 'Exsit Addons', 'exsit-addons' ),
                 'icon'  => 'fa fa-plug',
             ]
         );
