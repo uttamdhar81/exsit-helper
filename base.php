@@ -92,6 +92,18 @@ final class Base
                 new \Exsit_Pricing_Card_Widget()
             );
         }
+
+        // Badge Card Widget
+        $badge_widget = EXSIT_HELPER_PATH . 'widgets/badge.php';
+
+        if (file_exists($badge_widget)) {
+
+            require_once $badge_widget;
+
+            $widgets_manager->register(
+                new \Exsit_Badge_Widget()
+            );
+        }
     }
 
     /**

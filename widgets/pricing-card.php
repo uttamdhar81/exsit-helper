@@ -752,7 +752,7 @@ BADGE STYLE
             <?php if (!empty($settings['badge_text'])): ?>
 
                 <div
-                    class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 border shadow-sm rounded-3 d-flex align-items-center gap-2">
+                    class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 shadow-sm rounded-3 d-flex align-items-center gap-2">
 
                     <?php
                     if (!empty($settings['badge_icon']['value'])) {
