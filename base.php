@@ -104,6 +104,18 @@ final class Base
                 new \Exsit_Badge_Widget()
             );
         }
+
+        // Counter Widget
+        $counter_widget = EXSIT_HELPER_PATH . 'widgets/counter.php';
+
+        if (file_exists($counter_widget)) {
+
+            require_once $counter_widget;
+
+            $widgets_manager->register(
+                new \Exsit_Counter_Widget()
+            );
+        }
     }
 
     /**
