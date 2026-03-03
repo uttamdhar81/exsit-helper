@@ -239,6 +239,59 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
         $this->end_controls_section();
 
+        // EXTRA FEATURE
+
+        $this->start_controls_section(
+            'extra_sections',
+            [
+                'label' => __('Extra Sections', 'exsit-addons'),
+            ]
+        );
+
+        $section_repeater = new Repeater();
+
+        $section_repeater->add_control(
+            'section_title',
+            [
+                'label' => __('Section Title', 'exsit-addons'),
+                'type' => Controls_Manager::TEXT,
+                'default' => 'What you can do',
+            ]
+        );
+
+        $item_repeater = new Repeater();
+
+        $item_repeater->add_control(
+            'item_text',
+            [
+                'label' => __('Item Text', 'exsit-addons'),
+                'type' => Controls_Manager::TEXT,
+                'default' => 'Customize your booking page',
+            ]
+        );
+
+        $section_repeater->add_control(
+            'items',
+            [
+                'label' => __('Items', 'exsit-addons'),
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $item_repeater->get_controls(),
+                'title_field' => '{{{ item_text }}}',
+            ]
+        );
+
+        $this->add_control(
+            'extra_lists',
+            [
+                'label' => __('Sections', 'exsit-addons'),
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $section_repeater->get_controls(),
+                'title_field' => '{{{ section_title }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+
         /* ---------------------------
         BADGE
         ----------------------------*/
@@ -623,6 +676,56 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
         $this->end_controls_section();
 
+
+
+        $this->start_controls_section(
+            'extra_section_title_style',
+            [
+                'label' => __('Extra Section Title', 'exsit-addons'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'extra_title_color',
+            [
+                'label' => __('Color', 'exsit-addons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-extra-title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'extra_title_typography',
+                'selector' => '{{WRAPPER}} .exsit-extra-title',
+            ]
+        );
+
+        $this->add_control(
+            'item_text_color',
+            [
+                'label' => __('Color', 'exsit-addons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-extra-item' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'item_typography',
+                'selector' => '{{WRAPPER}} .exsit-extra-item',
+            ]
+        );
+
+        $this->end_controls_section();
+
         /* ---------------------------
         FEATURE ICON STYLE
         ----------------------------*/
@@ -758,7 +861,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     RENDER
     -------------------------------------------------- */
 
-    protected function render() {
+    protected function render()
+    {
 
         $settings = $this->get_settings_for_display();
 
@@ -775,7 +879,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     STYLE 1
     -------------------------------------------------- */
 
-    protected function render_style1($settings) {
+    protected function render_style1($settings)
+    {
         ?>
 
         <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
@@ -803,6 +908,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
             <?php $this->render_features($settings); ?>
 
+            <?php $this->render_extra_sections($settings); ?>
+
         </div>
 
         <?php
@@ -813,7 +920,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     STYLE 2
     -------------------------------------------------- */
 
-    protected function render_style2($settings) {
+    protected function render_style2($settings)
+    {
         ?>
 
         <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
@@ -821,14 +929,14 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
             <?php $this->render_badge($settings); ?>
 
             <div>
-                <h3 class="exsit-price-title"><?php echo esc_html($settings['plan_title']); ?></h3>
+                <h3 class="exsit-price-title mb-2"><?php echo esc_html($settings['plan_title']); ?></h3>
 
                 <p class="exsit-price-desc mb-0">
                     <?php echo esc_html($settings['plan_desc']); ?>
                 </p>
             </div>
 
-            <div class="lh-1 d-flex flex-row align-items-baseline gap-1">
+            <div class="lh-1 d-flex flex-row align-items-baseline gap-1 py-2">
                 <span class="exsit-price"><?php echo esc_html($settings['price']); ?></span>
                 <span class="exsit-billing"><?php echo esc_html($settings['billing_text']); ?></span>
             </div>
@@ -847,12 +955,15 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     BADGE
     -------------------------------------------------- */
 
-    protected function render_badge($settings) {
+    protected function render_badge($settings)
+    {
 
-        if (empty($settings['badge_text'])) return;
+        if (empty($settings['badge_text']))
+            return;
         ?>
 
-        <div class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 shadow-sm rounded-3 d-flex align-items-center gap-2">
+        <div
+            class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 shadow-sm rounded-3 d-flex align-items-center gap-2">
 
             <?php
             if (!empty($settings['badge_icon']['value'])) {
@@ -872,13 +983,16 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     BUTTON
     -------------------------------------------------- */
 
-    protected function render_button($settings) {
+    protected function render_button($settings)
+    {
 
-        if (empty($settings['button_text'])) return;
+        if (empty($settings['button_text']))
+            return;
 
         ?>
 
-        <a href="<?php echo esc_url($settings['button_link']['url']); ?>" class="elementor-button elementor-size-lg exsit-price-btn">
+        <a href="<?php echo esc_url($settings['button_link']['url']); ?>"
+            class="elementor-button elementor-size-lg exsit-price-btn">
 
             <?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'before'): ?>
 
@@ -910,9 +1024,11 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     FEATURES
     -------------------------------------------------- */
 
-    protected function render_features($settings) {
+    protected function render_features($settings)
+    {
 
-        if (empty($settings['features'])) return;
+        if (empty($settings['features']))
+            return;
 
         ?>
 
@@ -935,6 +1051,55 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
             <?php endforeach; ?>
 
         </div>
+
+        <?php
+    }
+
+    /* --------------------------------------------------
+    EXTRA FEATURES
+    -------------------------------------------------- */
+    protected function render_extra_sections($settings)
+    {
+
+        if (empty($settings['extra_lists']))
+            return;
+
+        ?>
+
+        <?php foreach ($settings['extra_lists'] as $section): ?>
+
+            <div class="border-top"></div>
+
+            <div class="exsit-extra-section">
+
+                <?php if (!empty($section['section_title'])): ?>
+
+                    <h5 class="exsit-extra-title mb-3">
+                        <?php echo esc_html($section['section_title']); ?>
+                    </h5>
+
+                <?php endif; ?>
+
+
+                <?php if (!empty($section['items'])): ?>
+
+                    <div class="exsit-extra-items">
+
+                        <?php foreach ($section['items'] as $item): ?>
+
+                            <p class="exsit-extra-item mb-2">
+                                <?php echo esc_html($item['item_text']); ?>
+                            </p>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
+        <?php endforeach; ?>
 
         <?php
     }
