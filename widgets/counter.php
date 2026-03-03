@@ -148,7 +148,7 @@ class Exsit_Counter_Widget extends Widget_Base
 
         ?>
 
-        <h3 class="exsit-counter-wrapper lh-1 align-items-baseline d-flex">
+        <h3 class="exsit-counter-wrapper lh-1 align-items-baseline d-flex mb-0">
 
             <span class="exsit-counter" data-percentage="<?php echo esc_attr($settings['counter_number']); ?>">
                 <?php echo esc_html($settings['counter_number']); ?>

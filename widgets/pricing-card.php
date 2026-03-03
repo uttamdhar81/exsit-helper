@@ -47,6 +47,19 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         );
 
         $this->add_control(
+            'layout_style',
+            [
+                'label' => __('Layout Style', 'exsit-addons'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'style1',
+                'options' => [
+                    'style1' => __('Style 1', 'exsit-addons'),
+                    'style2' => __('Style 2', 'exsit-addons'),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'plan_title',
             [
                 'label' => __('Title', 'exsit-addons'),
@@ -666,8 +679,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->end_controls_section();
 
         /* ---------------------------
-BADGE STYLE
-----------------------------*/
+        BADGE STYLE
+        ----------------------------*/
 
         $this->start_controls_section(
             'badge_style',
@@ -741,33 +754,33 @@ BADGE STYLE
     }
 
 
-    protected function render()
-    {
+    /* --------------------------------------------------
+    RENDER
+    -------------------------------------------------- */
+
+    protected function render() {
 
         $settings = $this->get_settings_for_display();
+
+        if ($settings['layout_style'] === 'style2') {
+            $this->render_style2($settings);
+        } else {
+            $this->render_style1($settings);
+        }
+
+    }
+
+
+    /* --------------------------------------------------
+    STYLE 1
+    -------------------------------------------------- */
+
+    protected function render_style1($settings) {
         ?>
 
         <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
 
-            <?php if (!empty($settings['badge_text'])): ?>
-
-                <div
-                    class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 shadow-sm rounded-3 d-flex align-items-center gap-2">
-
-                    <?php
-                    if (!empty($settings['badge_icon']['value'])) {
-                        \Elementor\Icons_Manager::render_icon(
-                            $settings['badge_icon'],
-                            ['aria-hidden' => 'true']
-                        );
-                    }
-                    ?>
-
-                    <?php echo esc_html($settings['badge_text']); ?>
-
-                </div>
-
-            <?php endif; ?>
+            <?php $this->render_badge($settings); ?>
 
             <div>
                 <h3 class="exsit-price-title"><?php echo esc_html($settings['plan_title']); ?></h3>
@@ -778,82 +791,148 @@ BADGE STYLE
             </div>
 
             <div class="lh-1 d-flex flex-row align-items-baseline gap-1">
-                <span class="exsit-price">
-                    <?php echo esc_html($settings['price']); ?>
-                </span>
-
-                <span class="exsit-billing">
-                    <?php echo esc_html($settings['billing_text']); ?>
-                </span>
+                <span class="exsit-price"><?php echo esc_html($settings['price']); ?></span>
+                <span class="exsit-billing"><?php echo esc_html($settings['billing_text']); ?></span>
             </div>
 
             <div class="border-top"></div>
 
-            <?php if (!empty($settings['button_text'])): ?>
+            <?php $this->render_button($settings); ?>
 
-                <a href="<?php echo esc_url($settings['button_link']['url']); ?>"
-                    class="elementor-button elementor-size-lg exsit-price-btn">
+            <div class="border-top"></div>
 
-                    <?php
-                    if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'before'):
-                        ?>
-                        <span class="exsit-btn-icon-before">
-                            <?php
-                            \Elementor\Icons_Manager::render_icon(
-                                $settings['button_icon'],
-                                ['aria-hidden' => 'true']
-                            );
-                            ?>
-                        </span>
-                    <?php endif; ?>
+            <?php $this->render_features($settings); ?>
 
-                    <span class="exsit-btn-text">
-                        <?php echo esc_html($settings['button_text']); ?>
-                    </span>
+        </div>
 
-                    <?php
-                    if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'after'):
-                        ?>
-                        <span class="exsit-btn-icon-after">
-                            <?php
-                            \Elementor\Icons_Manager::render_icon(
-                                $settings['button_icon'],
-                                ['aria-hidden' => 'true']
-                            );
-                            ?>
-                        </span>
-                    <?php endif; ?>
+        <?php
+    }
 
-                </a>
+
+    /* --------------------------------------------------
+    STYLE 2
+    -------------------------------------------------- */
+
+    protected function render_style2($settings) {
+        ?>
+
+        <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
+
+            <?php $this->render_badge($settings); ?>
+
+            <div>
+                <h3 class="exsit-price-title"><?php echo esc_html($settings['plan_title']); ?></h3>
+
+                <p class="exsit-price-desc mb-0">
+                    <?php echo esc_html($settings['plan_desc']); ?>
+                </p>
+            </div>
+
+            <div class="lh-1 d-flex flex-row align-items-baseline gap-1">
+                <span class="exsit-price"><?php echo esc_html($settings['price']); ?></span>
+                <span class="exsit-billing"><?php echo esc_html($settings['billing_text']); ?></span>
+            </div>
+
+            <?php $this->render_features($settings); ?>
+
+            <?php $this->render_button($settings); ?>
+
+        </div>
+
+        <?php
+    }
+
+
+    /* --------------------------------------------------
+    BADGE
+    -------------------------------------------------- */
+
+    protected function render_badge($settings) {
+
+        if (empty($settings['badge_text'])) return;
+        ?>
+
+        <div class="exsit-price-badge position-absolute start-50 translate-middle-x top-n-4 px-3 py-1 shadow-sm rounded-3 d-flex align-items-center gap-2">
+
+            <?php
+            if (!empty($settings['badge_icon']['value'])) {
+                Icons_Manager::render_icon($settings['badge_icon'], ['aria-hidden' => 'true']);
+            }
+            ?>
+
+            <?php echo esc_html($settings['badge_text']); ?>
+
+        </div>
+
+        <?php
+    }
+
+
+    /* --------------------------------------------------
+    BUTTON
+    -------------------------------------------------- */
+
+    protected function render_button($settings) {
+
+        if (empty($settings['button_text'])) return;
+
+        ?>
+
+        <a href="<?php echo esc_url($settings['button_link']['url']); ?>" class="elementor-button elementor-size-lg exsit-price-btn">
+
+            <?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'before'): ?>
+
+                <span class="exsit-btn-icon-before">
+                    <?php Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true']); ?>
+                </span>
 
             <?php endif; ?>
 
-            <div class="border-top"></div>
+            <span class="exsit-btn-text">
+                <?php echo esc_html($settings['button_text']); ?>
+            </span>
 
-            <div>
+            <?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'after'): ?>
 
-                <?php foreach ($settings['features'] as $feature): ?>
+                <span class="exsit-btn-icon-after">
+                    <?php Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true']); ?>
+                </span>
 
-                    <p class="d-flex align-items-center gap-2 mb-2">
+            <?php endif; ?>
 
-                        <span class="exsit-feature-icon">
-                            <?php
-                            Icons_Manager::render_icon(
-                                $feature['feature_icon'],
-                                ['aria-hidden' => 'true']
-                            );
-                            ?>
-                        </span>
+        </a>
 
-                        <span class="exsit-feature-text">
-                            <?php echo esc_html($feature['feature_text']); ?>
-                        </span>
+        <?php
+    }
 
-                    </p>
 
-                <?php endforeach; ?>
+    /* --------------------------------------------------
+    FEATURES
+    -------------------------------------------------- */
 
-            </div>
+    protected function render_features($settings) {
+
+        if (empty($settings['features'])) return;
+
+        ?>
+
+        <div>
+
+            <?php foreach ($settings['features'] as $feature): ?>
+
+                <p class="d-flex align-items-center gap-2 mb-2">
+
+                    <span class="exsit-feature-icon">
+                        <?php Icons_Manager::render_icon($feature['feature_icon'], ['aria-hidden' => 'true']); ?>
+                    </span>
+
+                    <span class="exsit-feature-text">
+                        <?php echo esc_html($feature['feature_text']); ?>
+                    </span>
+
+                </p>
+
+            <?php endforeach; ?>
 
         </div>
 
