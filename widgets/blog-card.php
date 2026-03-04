@@ -115,6 +115,38 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .post-image' => 'aspect-ratio: 1 / {{SIZE}};',
                 ],
+                'condition' => [
+                    'layout_style' => 'style1'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'style2_image_width',
+            [
+                'label' => __('Image Width', 'exsit-addons'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 80,
+                        'max' => 400,
+                    ],
+                    '%' => [
+                        'min' => 10,
+                        'max' => 50,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 220,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-blog-style2 .post-image' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'layout_style' => 'style2'
+                ]
             ]
         );
 
@@ -257,7 +289,39 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             [
                 'label' => __('Enable Pagination', 'exsit-addons'),
                 'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'exsit-addons'),
+                'label_off' => __('No', 'exsit-addons'),
+                'return_value' => 'yes',
                 'default' => '',
+            ]
+        );
+
+        $this->add_control(
+            'pagination_type',
+            [
+                'label' => __('Pagination Type', 'exsit-addons'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'numbers',
+                'options' => [
+                    'numbers' => __('Numbers', 'exsit-addons'),
+                    'loadmore' => __('Load More Button', 'exsit-addons'),
+                ],
+                'condition' => [
+                    'pagination' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'load_more_text',
+            [
+                'label' => __('Load More Text', 'exsit-addons'),
+                'type' => Controls_Manager::TEXT,
+                'default' => __('Load More', 'exsit-addons'),
+                'condition' => [
+                    'pagination' => 'yes',
+                    'pagination_type' => 'loadmore'
+                ]
             ]
         );
 
@@ -267,6 +331,52 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         /* ---------------------------
         STYLE - TITLE
         ----------------------------*/
+
+        $this->start_controls_section(
+            'card_style_section',
+            [
+                'label' => __('Card', 'exsit-addons'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        /* Border */
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'card_border',
+                'selector' => '{{WRAPPER}} .post-blog-card',
+            ]
+        );
+
+        /* Border Radius */
+
+        $this->add_responsive_control(
+            'card_border_radius',
+            [
+                'label' => __('Border Radius', 'exsit-addons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .post-blog-card' =>
+                        'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Box Shadow */
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'card_shadow',
+                'selector' => '{{WRAPPER}} .post-blog-card',
+            ]
+        );
+
+        $this->end_controls_section();
+
 
         $this->start_controls_section(
             'title_style',
@@ -479,11 +589,14 @@ class Exsit_Blog_Card_Widget extends Widget_Base
     protected function render_style1($settings)
     {
 
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
         $args = [
             'post_type' => 'post',
             'posts_per_page' => $settings['posts_per_page'],
             'orderby' => $settings['order_by'],
             'order' => $settings['order'],
+            'paged' => $paged,
         ];
 
         if ($settings['source'] === 'manual' && !empty($settings['posts_ids'])) {
@@ -569,6 +682,25 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         </div>
 
+        </div> <!-- end row -->
+
+        <?php
+        if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
+            ?>
+
+            <div class="post-pagination">
+
+                <?php
+                echo paginate_links([
+                    'total' => $query->max_num_pages,
+                    'current' => $paged,
+                ]);
+                ?>
+
+            </div>
+
+        <?php endif; ?>
+
         <?php
         wp_reset_postdata();
 
@@ -577,7 +709,119 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
     protected function render_style2($settings)
     {
-        echo '<p>Style2 coming soon</p>';
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+        $args = [
+            'post_type' => 'post',
+            'posts_per_page' => $settings['posts_per_page'],
+            'orderby' => $settings['order_by'],
+            'order' => $settings['order'],
+            'paged' => $paged,
+        ];
+
+        if ($settings['source'] === 'manual' && !empty($settings['posts_ids'])) {
+            $args['post__in'] = $settings['posts_ids'];
+        }
+
+        if ($settings['source'] === 'exclude' && !empty($settings['exclude_posts'])) {
+            $args['post__not_in'] = $settings['exclude_posts'];
+        }
+
+        $query = new WP_Query($args);
+
+        if (!$query->have_posts())
+            return;
+
+        ?>
+
+        <div class="row post-blog-wrapper post-blog-style2">
+
+            <?php while ($query->have_posts()):
+                $query->the_post(); ?>
+
+                <div class="col-lg-12 mb-4">
+
+                    <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-row gap-3 post-blog-card">
+
+                        <?php if (has_post_thumbnail()): ?>
+                            <div class="post-image scale-img overflow-hidden flex-shrink-0 overflow-hidden rounded-4">
+                                <?php the_post_thumbnail($settings['image_size'], [
+                                    'class' => 'w-100 h-100 d-block object-fit-cover',
+                                    'loading' => 'lazy'
+                                ]); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="post-content d-flex flex-column p-3 bg-white overflow-hidden z-5">
+
+                            <div class="post-blog-tag d-flex flex-row">
+                                <span><?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?></span>
+                                <span class="mx-1">•</span>
+                                <span><?php echo $this->get_read_time(); ?> min read</span>
+                            </div>
+
+                            <h3 class="post-blog-title mt-2 mb-2">
+                                <?php the_title(); ?>
+                            </h3>
+
+                            <?php if ($settings['show_excerpt'] === 'yes'): ?>
+                                <p class="post-blog-excerpt mb-2">
+                                    <?php echo wp_trim_words(get_the_excerpt(), $settings['excerpt_length']); ?>
+                                </p>
+                            <?php endif; ?>
+
+                            <div class="d-flex flex-row gap-3 mt-2">
+                                <div>
+                                    <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
+                                        'class' => 'rounded-circle'
+                                    ]); ?>
+                                </div>
+                                <div class="d-flex flex-column">
+
+                                    <span class="post-blog-author">
+                                        <?php the_author(); ?>
+                                    </span>
+
+                                    <span class="post-blog-author-role">
+                                        <?php
+                                        $user = get_userdata(get_the_author_meta('ID'));
+                                        $roles = $user->roles;
+                                        $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
+
+                                        echo esc_html($role);
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        </div> <!-- end row -->
+
+        <?php
+        if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
+            ?>
+
+            <div class="post-pagination">
+
+                <?php
+                echo paginate_links([
+                    'total' => $query->max_num_pages,
+                    'current' => $paged,
+                ]);
+                ?>
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php
+        wp_reset_postdata();
     }
 
 
