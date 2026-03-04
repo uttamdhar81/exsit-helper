@@ -116,6 +116,18 @@ final class Base
                 new \Exsit_Counter_Widget()
             );
         }
+
+        // Blog Widget
+        $blog_widget = EXSIT_HELPER_PATH . 'widgets/blog-card.php';
+
+        if (file_exists($blog_widget)) {
+
+            require_once $blog_widget;
+
+            $widgets_manager->register(
+                new \Exsit_Blog_Card_Widget()
+            );
+        }
     }
 
     /**
