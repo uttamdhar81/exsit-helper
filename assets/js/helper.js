@@ -1,31 +1,50 @@
 (function ($) {
 
   "use strict";
-  $(window).on('elementor/frontend/init', function () {
-    elementorFrontend.hooks.addAction(
-      'frontend/element_ready/global',
-      function ($scope) {
 
-        $(document).on("click", ".post-load-more-btn", function () {
+  $(document).on("click", ".post-load-more-btn", function () {
 
-          let button = $(this);
-          let page = parseInt(button.data("page"));
-          let max = parseInt(button.data("max"));
+    let button = $(this);
+    let wrapper = $(".post-blog-wrapper");
 
-          if (page >= max) return;
+    let page = parseInt(button.attr("data-page")) + 1;
+    let max = parseInt(button.attr("data-max"));
 
-          page++;
+    let posts_per_page = button.attr("data-posts-per-page");
+    let image_size = button.attr("data-image-size");
+    let excerpt_length = button.attr("data-excerpt-length");
 
-          $.get(window.location.href + "?paged=" + page, function (data) {
-            let posts = $(data).find(".post-blog-wrapper").html();
-            $(".post-blog-wrapper").append(posts);
-            button.data("page", page);
-            if (page >= max) {
-              button.hide();
-            }
-          });
-        });
-      });
+    $.ajax({
+
+      url: exsit_ajax.ajaxurl,
+      type: "POST",
+
+      data: {
+        action: "exsit_load_more_posts",
+        page: page,
+        posts_per_page: posts_per_page,
+        image_size: image_size,
+        excerpt_length: excerpt_length
+      },
+
+      success: function (response) {
+
+        if (response.trim() === "") {
+          button.hide();
+          return;
+        }
+
+        wrapper.append(response);
+
+        button.attr("data-page", page);
+
+        if (page >= max) {
+          button.hide();
+        }
+
+      }
+
+    });
 
   });
 

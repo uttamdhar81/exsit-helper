@@ -70,14 +70,23 @@ if ( file_exists( EXSIT_HELPER_INC . 'demo-data/demo-import.php' ) ) {
     require_once EXSIT_HELPER_INC . 'demo-data/demo-import.php';
 }
 
-function exsit_helper_scripts() {
+function exsit_enqueue_scripts(){
+
     wp_enqueue_script(
-        'exsit-helper-js',
-        plugins_url('assets/js/helper.js', __FILE__),
+        'exsit-helper',
+        plugins_url('/assets/js/helper.js', __FILE__),
         ['jquery'],
         '1.0',
         true
     );
-}
 
-add_action('wp_enqueue_scripts', 'exsit_helper_scripts');
+    wp_localize_script(
+        'exsit-helper',
+        'exsit_ajax',
+        [
+            'ajaxurl' => admin_url('admin-ajax.php')
+        ]
+    );
+
+}
+add_action('wp_enqueue_scripts','exsit_enqueue_scripts');

@@ -709,14 +709,17 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
     protected function render_style2($settings)
     {
+        // 1. Setup Pagination Logic
         $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
+        // 2. Setup Query Arguments
         $args = [
             'post_type' => 'post',
             'posts_per_page' => $settings['posts_per_page'],
             'orderby' => $settings['order_by'],
             'order' => $settings['order'],
             'paged' => $paged,
+            'post_status' => 'publish',
         ];
 
         if ($settings['source'] === 'manual' && !empty($settings['posts_ids'])) {
@@ -729,18 +732,20 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         $query = new WP_Query($args);
 
-        if (!$query->have_posts())
+        if (!$query->have_posts()) {
             return;
+        }
 
+        // 3. Unique ID for AJAX Container targeting
+        $wrapper_id = 'blog-wrapper-' . $this->get_id();
         ?>
 
-        <div class="row post-blog-wrapper post-blog-style2">
+        <div class="row post-blog-wrapper post-blog-style2" id="<?php echo esc_attr($wrapper_id); ?>">
 
             <?php while ($query->have_posts()):
                 $query->the_post(); ?>
 
                 <div class="col-lg-12 mb-4">
-
                     <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-row gap-3 post-blog-card">
 
                         <?php if (has_post_thumbnail()): ?>
@@ -777,22 +782,20 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                                     ]); ?>
                                 </div>
                                 <div class="d-flex flex-column">
-
                                     <span class="post-blog-author">
                                         <?php the_author(); ?>
                                     </span>
-
                                     <span class="post-blog-author-role">
                                         <?php
                                         $user = get_userdata(get_the_author_meta('ID'));
                                         $roles = $user->roles;
                                         $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
-
                                         echo esc_html($role);
                                         ?>
                                     </span>
                                 </div>
                             </div>
+                            
                         </div>
                     </a>
                 </div>
@@ -816,7 +819,10 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
                 <?php elseif ($settings['pagination_type'] === 'loadmore'): ?>
 
-                    <button class="post-load-more-btn" data-page="<?php echo esc_attr($paged); ?>"
+                    <button class="post-load-more-btn" data-page="1"
+                        data-posts-per-page="<?php echo esc_attr($settings['posts_per_page']); ?>"
+                        data-image-size="<?php echo esc_attr($settings['image_size']); ?>"
+                        data-excerpt-length="<?php echo esc_attr($settings['excerpt_length']); ?>"
                         data-max="<?php echo esc_attr($query->max_num_pages); ?>">
                         <?php echo esc_html($settings['load_more_text']); ?>
                     </button>
