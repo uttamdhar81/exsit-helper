@@ -682,7 +682,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         </div>
 
-        
+
 
         <?php
         if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
@@ -801,18 +801,27 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         </div>
 
-        <?php
-        if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
-            ?>
+        <?php if ($settings['pagination'] === 'yes'): ?>
 
             <div class="post-pagination">
 
-                <?php
-                echo paginate_links([
-                    'total' => $query->max_num_pages,
-                    'current' => $paged,
-                ]);
-                ?>
+                <?php if ($settings['pagination_type'] === 'numbers'): ?>
+
+                    <?php
+                    echo paginate_links([
+                        'total' => $query->max_num_pages,
+                        'current' => $paged,
+                    ]);
+                    ?>
+
+                <?php elseif ($settings['pagination_type'] === 'loadmore'): ?>
+
+                    <button class="post-load-more-btn" data-page="<?php echo esc_attr($paged); ?>"
+                        data-max="<?php echo esc_attr($query->max_num_pages); ?>">
+                        <?php echo esc_html($settings['load_more_text']); ?>
+                    </button>
+
+                <?php endif; ?>
 
             </div>
 
