@@ -317,7 +317,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             [
                 'label' => __('Load More Text', 'exsit-addons'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Load More', 'exsit-addons'),
+                'default' => __('Load more', 'exsit-addons'),
                 'condition' => [
                     'pagination' => 'yes',
                     'pagination_type' => 'loadmore'
@@ -803,7 +803,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         <?php if ($settings['pagination'] === 'yes'): ?>
 
-            <div class="post-pagination">
+            <div class="post-pagination d-flex justify-content-center mt-4">
 
                 <?php if ($settings['pagination_type'] === 'numbers'): ?>
 
