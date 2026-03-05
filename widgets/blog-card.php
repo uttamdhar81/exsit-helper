@@ -682,7 +682,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         </div>
 
-        </div> <!-- end row -->
+        
 
         <?php
         if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
@@ -800,8 +800,6 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             <?php endwhile; ?>
 
         </div>
-
-        </div> <!-- end row -->
 
         <?php
         if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
