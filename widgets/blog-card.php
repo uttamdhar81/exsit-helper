@@ -187,6 +187,18 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'show_author',
+            [
+                'label' => __('Show Author', 'exsit-addons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'exsit-addons'),
+                'label_off' => __('Hide', 'exsit-addons'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->end_controls_section();
 
 
@@ -589,14 +601,17 @@ class Exsit_Blog_Card_Widget extends Widget_Base
     protected function render_style1($settings)
     {
 
+        // Pagination
         $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
+        // Query args
         $args = [
             'post_type' => 'post',
             'posts_per_page' => $settings['posts_per_page'],
             'orderby' => $settings['order_by'],
             'order' => $settings['order'],
             'paged' => $paged,
+            'post_status' => 'publish',
         ];
 
         if ($settings['source'] === 'manual' && !empty($settings['posts_ids'])) {
@@ -609,36 +624,45 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         $query = new WP_Query($args);
 
-        if (!$query->have_posts())
+        if (!$query->have_posts()) {
             return;
+        }
 
+        // Unique wrapper ID
+        $wrapper_id = 'blog-wrapper-' . $this->get_id();
         ?>
 
-        <div class="row post-blog-wrapper">
+        <div class="row post-blog-wrapper" id="<?php echo esc_attr($wrapper_id); ?>">
 
             <?php while ($query->have_posts()):
                 $query->the_post(); ?>
 
-                <div class="col-lg-<?php echo 12 / $settings['columns']; ?> mb-4">
+                <div class="col-lg-<?php echo esc_attr(12 / $settings['columns']); ?> mb-4">
 
                     <a href="<?php the_permalink(); ?>"
                         class="border border-gray-200 rounded-4 overflow-hidden d-flex flex-column shadow-hover-lg post-blog-card">
 
                         <?php if (has_post_thumbnail()): ?>
                             <div class="post-image scale-img overflow-hidden">
+
                                 <?php the_post_thumbnail($settings['image_size'], [
                                     'class' => 'w-100 h-100 d-block object-fit-cover',
                                     'loading' => 'lazy'
                                 ]); ?>
+
                             </div>
                         <?php endif; ?>
 
                         <div class="post-content d-flex flex-column p-3 bg-white overflow-hidden z-5">
 
                             <div class="post-blog-tag d-flex flex-row">
+
                                 <span><?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?></span>
+
                                 <span class="mx-1">•</span>
+
                                 <span><?php echo $this->get_read_time(); ?> min read</span>
+
                             </div>
 
                             <h3 class="post-blog-title mt-2 mb-2">
@@ -646,56 +670,72 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                             </h3>
 
                             <?php if ($settings['show_excerpt'] === 'yes'): ?>
+
                                 <p class="post-blog-excerpt mb-2">
                                     <?php echo wp_trim_words(get_the_excerpt(), $settings['excerpt_length']); ?>
                                 </p>
+
                             <?php endif; ?>
-
-                            <div class="d-flex flex-row gap-3 mt-2">
-                                <div>
-                                    <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
-                                        'class' => 'rounded-circle'
-                                    ]); ?>
+                            <?php if ($settings['show_author'] === 'yes'): ?>
+                                <div class="d-flex flex-row gap-3 mt-2">
+                                    <div>
+                                        <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
+                                            'class' => 'rounded-circle'
+                                        ]); ?>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <span class="post-blog-author">
+                                            <?php the_author(); ?>
+                                        </span>
+                                        <span class="post-blog-author-role">
+                                            <?php
+                                            $user = get_userdata(get_the_author_meta('ID'));
+                                            $roles = $user->roles;
+                                            $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
+                                            echo esc_html($role);
+                                            ?>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column">
-
-                                    <span class="post-blog-author">
-                                        <?php the_author(); ?>
-                                    </span>
-
-                                    <span class="post-blog-author-role">
-                                        <?php
-                                        $user = get_userdata(get_the_author_meta('ID'));
-                                        $roles = $user->roles;
-                                        $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
-
-                                        echo esc_html($role);
-                                        ?>
-                                    </span>
-                                </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </a>
                 </div>
-
             <?php endwhile; ?>
 
         </div>
 
 
+        <?php if ($settings['pagination'] === 'yes'): ?>
 
-        <?php
-        if ($settings['pagination'] === 'yes' && $settings['pagination_type'] === 'numbers'):
-            ?>
+            <div class="post-pagination d-flex justify-content-center mt-4">
 
-            <div class="post-pagination">
+                <?php if ($settings['pagination_type'] === 'numbers'): ?>
 
-                <?php
-                echo paginate_links([
-                    'total' => $query->max_num_pages,
-                    'current' => $paged,
-                ]);
-                ?>
+                    <?php
+                    echo paginate_links([
+                        'total' => $query->max_num_pages,
+                        'current' => $paged,
+                    ]);
+                    ?>
+
+                <?php elseif ($settings['pagination_type'] === 'loadmore'): ?>
+
+                    <button class="post-load-more-btn" data-page="1"
+                        data-posts-per-page="<?php echo esc_attr($settings['posts_per_page']); ?>"
+                        data-image-size="<?php echo esc_attr($settings['image_size']); ?>"
+                        data-excerpt-length="<?php echo esc_attr($settings['excerpt_length']); ?>"
+                        data-style="<?php echo esc_attr($settings['layout_style']); ?>"
+                        data-columns="<?php echo esc_attr($settings['columns']); ?>"
+                        data-show-excerpt="<?php echo esc_attr($settings['show_excerpt']); ?>"
+                        data-show-author="<?php echo esc_attr($settings['show_author']); ?>"
+                        data-max="<?php echo esc_attr($query->max_num_pages); ?>">
+
+                        <?php echo esc_html($settings['load_more_text']); ?>
+
+                    </button>
+
+                <?php endif; ?>
 
             </div>
 
@@ -703,7 +743,6 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         <?php
         wp_reset_postdata();
-
     }
 
 
@@ -775,27 +814,29 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                                 </p>
                             <?php endif; ?>
 
-                            <div class="d-flex flex-row gap-3 mt-2">
-                                <div>
-                                    <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
-                                        'class' => 'rounded-circle'
-                                    ]); ?>
+                            <?php if ($settings['show_author'] === 'yes'): ?>
+                                <div class="d-flex flex-row gap-3 mt-2">
+                                    <div>
+                                        <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
+                                            'class' => 'rounded-circle'
+                                        ]); ?>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <span class="post-blog-author">
+                                            <?php the_author(); ?>
+                                        </span>
+                                        <span class="post-blog-author-role">
+                                            <?php
+                                            $user = get_userdata(get_the_author_meta('ID'));
+                                            $roles = $user->roles;
+                                            $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
+                                            echo esc_html($role);
+                                            ?>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <span class="post-blog-author">
-                                        <?php the_author(); ?>
-                                    </span>
-                                    <span class="post-blog-author-role">
-                                        <?php
-                                        $user = get_userdata(get_the_author_meta('ID'));
-                                        $roles = $user->roles;
-                                        $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
-                                        echo esc_html($role);
-                                        ?>
-                                    </span>
-                                </div>
-                            </div>
-                            
+                            <?php endif; ?>
+
                         </div>
                     </a>
                 </div>
@@ -819,12 +860,20 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
                 <?php elseif ($settings['pagination_type'] === 'loadmore'): ?>
 
+
+
                     <button class="post-load-more-btn" data-page="1"
                         data-posts-per-page="<?php echo esc_attr($settings['posts_per_page']); ?>"
                         data-image-size="<?php echo esc_attr($settings['image_size']); ?>"
                         data-excerpt-length="<?php echo esc_attr($settings['excerpt_length']); ?>"
+                        data-style="<?php echo esc_attr($settings['layout_style']); ?>"
+                        data-columns="<?php echo esc_attr($settings['columns']); ?>"
+                        data-show-excerpt="<?php echo esc_attr($settings['show_excerpt']); ?>"
+                        data-show-author="<?php echo esc_attr($settings['show_author']); ?>"
                         data-max="<?php echo esc_attr($query->max_num_pages); ?>">
+
                         <?php echo esc_html($settings['load_more_text']); ?>
+
                     </button>
 
                 <?php endif; ?>
@@ -840,13 +889,9 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
     private function get_read_time()
     {
-
         $content = get_post_field('post_content', get_the_ID());
-
         $word_count = str_word_count(strip_tags($content));
-
         $readingtime = ceil($word_count / 200);
-
         return $readingtime;
 
     }

@@ -120,6 +120,11 @@ function exsit_load_more_posts()
     $posts_per_page = intval($_POST['posts_per_page']);
     $image_size = sanitize_text_field($_POST['image_size']);
     $excerpt_length = intval($_POST['excerpt_length']);
+    $show_excerpt = isset($_POST['show_excerpt']) ? sanitize_text_field($_POST['show_excerpt']) : 'yes';
+    $show_author = isset($_POST['show_author']) ? sanitize_text_field($_POST['show_author']) : 'yes';
+
+    $style = isset($_POST['style']) ? sanitize_text_field($_POST['style']) : 'style1';
+    $columns = isset($_POST['columns']) ? intval($_POST['columns']) : 3;
 
     $args = [
         'post_type' => 'post',
@@ -132,19 +137,32 @@ function exsit_load_more_posts()
     if ($query->have_posts()):
 
         while ($query->have_posts()):
-            $query->the_post(); ?>
+            $query->the_post();
 
-            <div class="col-lg-12 mb-4">
+            // column class
+            $col_class = ($style === 'style1') ? 'col-lg-' . (12 / $columns) : 'col-lg-12';
 
-                <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-row gap-3 post-blog-card">
+            // layout class
+            $layout_class = ($style === 'style1') ? 'd-flex flex-column' : 'd-flex flex-row gap-3';
+            ?>
+
+            <div class="<?php echo esc_attr($col_class); ?> mb-4">
+
+                <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden <?php echo esc_attr($layout_class); ?> post-blog-card
+                   <?php echo ($style === 'style1') ? 'border border-gray-200 shadow-hover-lg' : ''; ?>">
 
                     <?php if (has_post_thumbnail()): ?>
-                        <div class="post-image scale-img overflow-hidden flex-shrink-0 rounded-4">
+
+                        <div
+                            class="post-image scale-img overflow-hidden <?php echo ($style === 'style2') ? 'flex-shrink-0 rounded-4' : ''; ?>">
+
                             <?php the_post_thumbnail($image_size, [
                                 'class' => 'w-100 h-100 d-block object-fit-cover',
                                 'loading' => 'lazy'
                             ]); ?>
+
                         </div>
+
                     <?php endif; ?>
 
                     <div class="post-content d-flex flex-column p-3 bg-white overflow-hidden z-5">
@@ -158,31 +176,35 @@ function exsit_load_more_posts()
                         <h3 class="post-blog-title mt-2 mb-2">
                             <?php the_title(); ?>
                         </h3>
+                        <?php if ($show_excerpt === 'yes'): ?>
+                            <p class="post-blog-excerpt mb-2">
+                                <?php echo wp_trim_words(get_the_excerpt(), $excerpt_length); ?>
+                            </p>
+                        <?php endif; ?>
 
-                        <p class="post-blog-excerpt mb-2">
-                            <?php echo wp_trim_words(get_the_excerpt(), $excerpt_length); ?>
-                        </p>
+                        <?php if ($show_author === 'yes'): ?>
+                            <div class="d-flex flex-row gap-3 mt-2">
+                                <div>
+                                    <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
+                                        'class' => 'rounded-circle'
+                                    ]); ?>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span class="post-blog-author">
+                                        <?php the_author(); ?>
+                                    </span>
+                                    <span class="post-blog-author-role">
+                                        <?php
+                                        $user = get_userdata(get_the_author_meta('ID'));
+                                        $roles = $user->roles;
+                                        $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
+                                        echo esc_html($role);
+                                        ?>
+                                    </span>
+                                </div>
 
-                        <div class="d-flex flex-row gap-3 mt-2">
-                            <div>
-                                <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
-                                    'class' => 'rounded-circle'
-                                ]); ?>
                             </div>
-                            <div class="d-flex flex-column">
-                                <span class="post-blog-author">
-                                    <?php the_author(); ?>
-                                </span>
-                                <span class="post-blog-author-role">
-                                    <?php
-                                    $user = get_userdata(get_the_author_meta('ID'));
-                                    $roles = $user->roles;
-                                    $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
-                                    echo esc_html($role);
-                                    ?>
-                                </span>
-                            </div>
-                        </div>
+                        <?php endif; ?>
 
                     </div>
 
