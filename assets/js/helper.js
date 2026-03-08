@@ -1,61 +1,97 @@
 (function ($) {
 
-  "use strict";
+    "use strict";
 
-  $(document).on("click", ".post-load-more-btn", function () {
+    /* -------------------------------------------------------
+    POST LOAD MORE
+    ------------------------------------------------------- */
+    $(document).on("click", ".post-load-more-btn", function () {
 
-    let button = $(this);
+        let button = $(this);
+        let wrapper = button.closest('.elementor-widget').find('.post-blog-wrapper');
 
-    // target correct widget wrapper
-    let wrapper = button.closest('.elementor-widget').find('.post-blog-wrapper');
+        let page = parseInt(button.attr("data-page")) + 1;
+        let max = parseInt(button.attr("data-max"));
 
-    let page = parseInt(button.attr("data-page")) + 1;
-    let max = parseInt(button.attr("data-max"));
+        $.ajax({
+            url: exsit_ajax.ajaxurl,
+            type: "POST",
+            data: {
+                action: "exsit_load_more_posts",
+                page: page,
+                posts_per_page: button.attr("data-posts-per-page"),
+                image_size: button.attr("data-image-size"),
+                excerpt_length: button.attr("data-excerpt-length"),
+                style: button.attr("data-style"),
+                columns: button.attr("data-columns"),
+                show_excerpt: button.attr("data-show-excerpt"),
+                show_author: button.attr("data-show-author")
+            },
+            success: function (response) {
 
-    let posts_per_page = button.attr("data-posts-per-page");
-    let image_size = button.attr("data-image-size");
-    let excerpt_length = button.attr("data-excerpt-length");
-    let style = button.attr("data-style");
-    let columns = button.attr("data-columns");
-    let show_excerpt = button.attr("data-show-excerpt");
-    let show_author = button.attr("data-show-author");
+                if ($.trim(response) === "") {
+                    button.hide();
+                    return;
+                }
 
-    $.ajax({
+                wrapper.append(response);
+                button.attr("data-page", page);
 
-      url: exsit_ajax.ajaxurl,
-      type: "POST",
+                if (page >= max) {
+                    button.hide();
+                }
 
-      data: {
-        action: "exsit_load_more_posts",
-        page: page,
-        posts_per_page: posts_per_page,
-        image_size: image_size,
-        excerpt_length: excerpt_length,
-        style: style,
-        columns: columns,
-        show_excerpt: show_excerpt,
-        show_author: show_author
-      },
-
-      success: function (response) {
-
-        if ($.trim(response) === "") {
-          button.hide();
-          return;
-        }
-
-        wrapper.append(response);
-
-        button.attr("data-page", page);
-
-        if (page >= max) {
-          button.hide();
-        }
-
-      }
+            }
+        });
 
     });
 
-  });
+
+    /* -------------------------------------------------------
+    SLICK SLIDER
+    ------------------------------------------------------- */
+
+    $(window).on('elementor/frontend/init', function () {
+
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/exsit_slick_slider.default',
+            function ($scope) {
+
+                let slider = $scope.find('.exsit-slick-slider');
+                let current = $scope.find('.exsit-slider-counter .current');
+                let total = $scope.find('.exsit-slider-counter .total');
+                let autoplay = slider.data('autoplay');
+                let dots = slider.data('dots');
+                let arrows = slider.data('arrows');
+                let autoplaySpeed = slider.data('autoplay-speed');
+
+
+                slider.on('init', function (event, slick) {
+                    total.text(slick.slideCount);
+                    current.text(slick.currentSlide + 1);
+                });
+
+                slider.on('afterChange', function (event, slick, currentSlide) {
+                    current.text(currentSlide + 1);
+                });
+
+                if (!slider.hasClass('slick-initialized')) {
+
+                    slider.slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: arrows,
+                        dots: dots,
+                        autoplay: autoplay,
+                        autoplaySpeed: autoplaySpeed,
+                        adaptiveHeight: true
+                    });
+
+                }
+
+            }
+        );
+
+    });
 
 })(jQuery);

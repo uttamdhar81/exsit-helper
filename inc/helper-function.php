@@ -219,3 +219,4 @@ function exsit_load_more_posts()
     wp_reset_postdata();
     wp_die();
 }
+

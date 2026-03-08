@@ -14,33 +14,33 @@
  * Domain Path:       /languages
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
 // Constants
-define( 'EXSIT_HELPER_PATH', plugin_dir_path( __FILE__ ) );
-define( 'EXSIT_HELPER_URL', plugin_dir_url( __FILE__ ) );
-define( 'EXSIT_HELPER_INC', plugin_dir_path( __FILE__ ) . 'inc/' );
+define('EXSIT_HELPER_PATH', plugin_dir_path(__FILE__));
+define('EXSIT_HELPER_URL', plugin_dir_url(__FILE__));
+define('EXSIT_HELPER_INC', plugin_dir_path(__FILE__) . 'inc/');
 
 // Load Codestar Framework
-if ( file_exists( EXSIT_HELPER_INC . 'codestar-framework/codestar-framework.php' ) ) {
+if (file_exists(EXSIT_HELPER_INC . 'codestar-framework/codestar-framework.php')) {
     require_once EXSIT_HELPER_INC . 'codestar-framework/codestar-framework.php';
 }
 
 // Load helper functions
-if ( file_exists( EXSIT_HELPER_INC . 'helper-function.php' ) ) {
+if (file_exists(EXSIT_HELPER_INC . 'helper-function.php')) {
     require_once EXSIT_HELPER_INC . 'helper-function.php';
 }
 
 // Load Base Class
-if ( file_exists( EXSIT_HELPER_PATH . 'base.php' ) ) {
+if (file_exists(EXSIT_HELPER_PATH . 'base.php')) {
     require_once EXSIT_HELPER_PATH . 'base.php';
     \Exsit\Base::instance();
 }
 
 // Load Theme Settings Init (creates Theme Settings menu)
-if ( file_exists( EXSIT_HELPER_INC . 'option/settings-init.php' ) ) {
+if (file_exists(EXSIT_HELPER_INC . 'option/settings-init.php')) {
     require_once EXSIT_HELPER_INC . 'option/settings-init.php';
 }
 
@@ -58,23 +58,23 @@ $settings_files = array(
     'backup.php',
 );
 
-foreach ( $settings_files as $file ) {
+foreach ($settings_files as $file) {
     $path = EXSIT_HELPER_INC . 'option/settings/' . $file;
-    if ( file_exists( $path ) ) {
+    if (file_exists($path)) {
         require_once $path;
     }
 }
 
 // Demo Import (optional)
-if ( file_exists( EXSIT_HELPER_INC . 'demo-data/demo-import.php' ) ) {
+if (file_exists(EXSIT_HELPER_INC . 'demo-data/demo-import.php')) {
     require_once EXSIT_HELPER_INC . 'demo-data/demo-import.php';
 }
 
-function exsit_enqueue_scripts(){
+function exsit_enqueue_scripts() {
 
     wp_enqueue_script(
         'exsit-helper',
-        plugins_url('/assets/js/helper.js', __FILE__),
+        EXSIT_HELPER_URL . 'assets/js/helper.js',
         ['jquery'],
         '1.0',
         true
@@ -88,5 +88,30 @@ function exsit_enqueue_scripts(){
         ]
     );
 
+    // Slick CSS
+    wp_register_style(
+        'slick-css',
+        EXSIT_HELPER_URL . 'assets/css/slick.css',
+        [],
+        '1.8.1'
+    );
+
+    wp_register_style(
+        'slick-theme-css',
+        EXSIT_HELPER_URL . 'assets/css/slick-theme.css',
+        ['slick-css'],
+        '1.8.1'
+    );
+
+    // Slick JS
+    wp_register_script(
+        'slick-slider',
+        EXSIT_HELPER_URL . 'assets/js/slick.min.js',
+        ['jquery'],
+        '1.8.1',
+        true
+    );
+
 }
-add_action('wp_enqueue_scripts','exsit_enqueue_scripts');
+
+add_action('wp_enqueue_scripts', 'exsit_enqueue_scripts');

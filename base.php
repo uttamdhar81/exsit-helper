@@ -128,6 +128,20 @@ final class Base
                 new \Exsit_Blog_Card_Widget()
             );
         }
+
+        // Slick Slider Widget
+        $slick_widget = EXSIT_HELPER_PATH . 'widgets/slick-slider.php';
+
+        if (file_exists($slick_widget)) {
+
+            require_once $slick_widget;
+
+            $widgets_manager->register(
+                new \Exsit_Slick_Slider()
+            );
+        }
+
+
     }
 
     /**
