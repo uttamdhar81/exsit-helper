@@ -8,6 +8,7 @@ use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use Elementor\Icons_Manager;
 use Elementor\Utils;
+use Elementor\Group_Control_Typography;
 
 class Exsit_Team_Member_Widget extends Widget_Base
 {
@@ -80,6 +81,19 @@ class Exsit_Team_Member_Widget extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Founder and CEO', 'exsit-addons'),
                 'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'card_style',
+            [
+                'label' => __('Card Style', 'exsit-addons'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'style1',
+                'options' => [
+                    'style1' => __('Card Style 1', 'exsit-addons'),
+                    'style2' => __('Card Style 2', 'exsit-addons'),
+                ],
             ]
         );
 
@@ -188,6 +202,80 @@ class Exsit_Team_Member_Widget extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => __('Style', 'exsit-helper'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        /* -----------------------------
+        MEMBER NAME STYLE
+        ----------------------------- */
+
+        $this->add_control(
+            'member_name_heading',
+            [
+                'label' => __('Member Name', 'exsit-helper'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'member_name_typography',
+                'selector' => '{{WRAPPER}} .exsit-member-name',
+            ]
+        );
+
+        $this->add_control(
+            'member_name_color',
+            [
+                'label' => __('Color', 'exsit-helper'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-member-name' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+
+        /* -----------------------------
+        MEMBER POSITION STYLE
+        ----------------------------- */
+
+        $this->add_control(
+            'member_position_heading',
+            [
+                'label' => __('Member Position', 'exsit-helper'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'member_position_typography',
+                'selector' => '{{WRAPPER}} .exsit-member-position',
+            ]
+        );
+
+        $this->add_control(
+            'member_position_color',
+            [
+                'label' => __('Color', 'exsit-helper'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-member-position' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
 
@@ -200,6 +288,10 @@ class Exsit_Team_Member_Widget extends Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
+        $layout_class = ($settings['card_style'] === 'style1')
+            ? 'text-center'
+            : 'text-start position-absolute bottom-0 start-0 p-4 w-100 pb-3';
+
         ?>
 
         <div class="exsit-team-member d-flex flex-column gap-3 member-wrap">
@@ -250,15 +342,19 @@ class Exsit_Team_Member_Widget extends Widget_Base
 
             </div>
 
-            <div class="text-center">
+            <div class="<?php echo esc_attr($layout_class); ?>">
 
-                <h3 class="text-gray-900 display3-size fw-600 mb-0">
-                    <?php echo esc_html($settings['member_name']); ?>
-                </h3>
+                <?php if (!empty($settings['member_name'])): ?>
+                    <h3 class="exsit-member-name">
+                        <?php echo esc_html($settings['member_name']); ?>
+                    </h3>
+                <?php endif; ?>
 
-                <p class="text-gray-700 fw-500 fs-16 mb-0">
-                    <?php echo esc_html($settings['member_position']); ?>
-                </p>
+                <?php if (!empty($settings['member_position'])): ?>
+                    <span class="exsit-member-position">
+                        <?php echo esc_html($settings['member_position']); ?>
+                    </span>
+                <?php endif; ?>
 
             </div>
 
