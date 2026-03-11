@@ -55,6 +55,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
                 'options' => [
                     'style1' => __('Style 1', 'exsit-addons'),
                     'style2' => __('Style 2', 'exsit-addons'),
+                    'style3' => __('Style 3', 'exsit-addons'),
                 ],
             ]
         );
@@ -868,6 +869,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
         if ($settings['layout_style'] === 'style2') {
             $this->render_style2($settings);
+        } elseif ($settings['layout_style'] === 'style3') {
+            $this->render_style3($settings);
         } else {
             $this->render_style1($settings);
         }
@@ -945,6 +948,31 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
             <?php $this->render_button($settings); ?>
 
+        </div>
+
+        <?php
+    }
+
+    protected function render_style3($settings)
+    {
+        ?>
+
+        <div class="exsit-price-card d-flex flex-lg-row flex-column p-4 rounded-4 gap-4">
+
+            <?php $this->render_badge($settings); ?>
+
+            <div class="w-lg-50">
+                <h3 class="exsit-price-title mb-2"><?php echo esc_html($settings['plan_title']); ?></h3>
+                <div>
+                    <span class="exsit-price"><?php echo esc_html($settings['price']); ?></span>
+                    <span class="exsit-billing"><?php echo esc_html($settings['billing_text']); ?></span>
+                </div>
+                <?php $this->render_button($settings); ?>
+            </div>
+
+            <div class="lh-1 d-flex flex-column w-lg-50 align-items-baseline gap-0">
+                <?php $this->render_features($settings); ?>
+            </div>
         </div>
 
         <?php
@@ -1036,7 +1064,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
             <?php foreach ($settings['features'] as $feature): ?>
 
-                <p class="d-flex align-items-center gap-2 mb-2">
+                <p class="d-flex align-items-center gap-2 mb-1">
 
                     <span class="exsit-feature-icon">
                         <?php Icons_Manager::render_icon($feature['feature_icon'], ['aria-hidden' => 'true']); ?>
