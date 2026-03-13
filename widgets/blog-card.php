@@ -53,6 +53,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 'options' => [
                     'style1' => __('Style 1', 'exsit-addons'),
                     'style2' => __('Style 2', 'exsit-addons'),
+                    'style3' => __('Style 3', 'exsit-addons'),
                 ],
             ]
         );
@@ -587,6 +588,8 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
         if ($settings['layout_style'] === 'style2') {
             $this->render_style2($settings);
+        } elseif ($settings['layout_style'] === 'style3') {
+            $this->render_style3($settings);
         } else {
             $this->render_style1($settings);
         }
@@ -881,6 +884,108 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             </div>
 
         <?php endif; ?>
+
+        <?php
+        wp_reset_postdata();
+    }
+
+    protected function render_style3($settings)
+    {
+
+        // Pagination
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+        // Query args
+        $args = [
+            'post_type' => 'post',
+            'posts_per_page' => $settings['posts_per_page'],
+            'orderby' => $settings['order_by'],
+            'order' => $settings['order'],
+            'paged' => $paged,
+            'post_status' => 'publish',
+        ];
+
+        if ($settings['source'] === 'manual' && !empty($settings['posts_ids'])) {
+            $args['post__in'] = $settings['posts_ids'];
+        }
+
+        if ($settings['source'] === 'exclude' && !empty($settings['exclude_posts'])) {
+            $args['post__not_in'] = $settings['exclude_posts'];
+        }
+
+        $query = new WP_Query($args);
+
+        if (!$query->have_posts()) {
+            return;
+        }
+
+        // Unique wrapper ID
+        $wrapper_id = 'blog-wrapper-' . $this->get_id();
+        ?>
+
+        <div class="row post-blog-wrapper" id="<?php echo esc_attr($wrapper_id); ?>">
+
+            <?php while ($query->have_posts()):
+                $query->the_post(); ?>
+
+                <div class="col-lg-<?php echo esc_attr(12 / $settings['columns']); ?> mb-4">
+
+                    <a href="<?php the_permalink(); ?>"
+                        class="border border-gray-200 rounded-4 overflow-hidden d-flex flex-column shadow-hover-lg post-blog-card h-100 min-h-500">
+
+                        <?php if (has_post_thumbnail()): ?>
+                            <div class="post-image overflow-hidden h-100 position-relative bg-gradient-black-bottom-g5">
+
+                                <?php the_post_thumbnail($settings['image_size'], [
+                                    'class' => 'w-100 h-100 d-block object-fit-cover',
+                                    'loading' => 'lazy'
+                                ]); ?>
+
+                                <div
+                                    class="post-content d-flex flex-column p-3 px-4 bg-transparent overflow-hidden z-5 position-absolute bottom-0 w-100 start-0">
+                                    <!-- post title -->
+                                    <h3 class="post-blog-title mt-2 mb-2">
+                                        <?php the_title(); ?>
+                                    </h3>
+                                    <?php if ($settings['show_excerpt'] === 'yes'): ?>
+
+                                        <p class="post-blog-excerpt mb-2">
+                                            <?php echo wp_trim_words(get_the_excerpt(), $settings['excerpt_length']); ?>
+                                        </p>
+
+                                    <?php endif; ?>
+                                    <?php if ($settings['show_author'] === 'yes'): ?>
+                                        <div class="d-flex flex-row gap-3 mt-2">
+                                            <div>
+                                                <?php echo get_avatar(get_the_author_meta('ID'), 40, '', '', [
+                                                    'class' => 'rounded-circle'
+                                                ]); ?>
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <span class="post-blog-author">
+                                                    <?php the_author(); ?>
+                                                </span>
+                                                <span class="post-blog-author-role">
+                                                    <?php
+                                                    $user = get_userdata(get_the_author_meta('ID'));
+                                                    $roles = $user->roles;
+                                                    $role = !empty($roles) ? ucfirst($roles[0]) : __('Author', 'exsit');
+                                                    echo esc_html($role);
+                                                    ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+
+                            </div>
+                        <?php endif; ?>
+                    </a>
+                </div>
+            <?php endwhile; ?>
+
+        </div>
 
         <?php
         wp_reset_postdata();
