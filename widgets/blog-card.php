@@ -58,6 +58,32 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'style3_min_height',
+            [
+                'label' => __('Min Height', 'exsit-addons'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'vh'],
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 1000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 450,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-img-style3' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'layout_style' => 'style3',
+                ],
+            ]
+        );
+
         $this->add_control(
             'posts_per_page',
             [
@@ -931,10 +957,10 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 <div class="col-lg-<?php echo esc_attr(12 / $settings['columns']); ?> mb-4">
 
                     <a href="<?php the_permalink(); ?>"
-                        class="border border-gray-200 rounded-4 overflow-hidden d-flex flex-column shadow-hover-lg post-blog-card h-100 min-h-500">
+                        class="border border-gray-200 rounded-4 overflow-hidden d-flex flex-column shadow-hover-lg blog-card-style3">
 
                         <?php if (has_post_thumbnail()): ?>
-                            <div class="post-image overflow-hidden h-100 position-relative bg-gradient-black-bottom-g5">
+                            <div class="post-image post-img-style3 overflow-hidden position-relative bg-gradient-black-bottom-g5">
 
                                 <?php the_post_thumbnail($settings['image_size'], [
                                     'class' => 'w-100 h-100 d-block object-fit-cover',
