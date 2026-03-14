@@ -56,6 +56,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
                     'style1' => __('Style 1', 'exsit-addons'),
                     'style2' => __('Style 2', 'exsit-addons'),
                     'style3' => __('Style 3', 'exsit-addons'),
+                    'style4' => __('Style 4', 'exsit-addons'),
                 ],
             ]
         );
@@ -871,6 +872,8 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
             $this->render_style2($settings);
         } elseif ($settings['layout_style'] === 'style3') {
             $this->render_style3($settings);
+        } elseif ($settings['layout_style'] === 'style4') {
+            $this->render_style4($settings);
         } else {
             $this->render_style1($settings);
         }
@@ -886,7 +889,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     {
         ?>
 
-        <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
+        <div class="exsit-price-card d-flex flex-column p-lg-5 p-4 rounded-4 gap-4">
 
             <?php $this->render_badge($settings); ?>
 
@@ -927,7 +930,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
     {
         ?>
 
-        <div class="exsit-price-card d-flex flex-column p-5 rounded-4 gap-4">
+        <div class="exsit-price-card d-flex flex-column p-lg-5 p-4 rounded-4 gap-4">
 
             <?php $this->render_badge($settings); ?>
 
@@ -973,6 +976,55 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
             <div class="lh-1 d-flex flex-column w-lg-50 align-items-baseline gap-0">
                 <?php $this->render_features($settings); ?>
             </div>
+        </div>
+
+        <?php
+    }
+
+    /* --------------------------------------------------
+    STYLE 4
+    -------------------------------------------------- */
+
+    protected function render_style4($settings)
+    {
+        ?>
+
+        <div class="exsit-price-card d-flex flex-column p-lg-5 p-4 rounded-4 gap-4 overflow-hidden position-relative">
+
+            <?php if (!empty($settings['badge_text'])): ?>
+                <div class="py-1 fs-13 fw-600 text-uppercase text-cyan text-center exsit-price-badge position-absolute w-100 start-0 top-0 ">
+                    <?php
+                    if (!empty($settings['badge_icon']['value'])) {
+                        Icons_Manager::render_icon($settings['badge_icon'], ['aria-hidden' => 'true']);
+                    }
+                    ?>
+                    <?php echo esc_html($settings['badge_text']); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="pt-4 mt-1">
+                <h3 class="exsit-price-title"><?php echo esc_html($settings['plan_title']); ?></h3>
+
+                <p class="exsit-price-desc mb-3">
+                    <?php echo esc_html($settings['plan_desc']); ?>
+                </p>
+            </div>
+
+            <div class="lh-1 d-flex flex-row align-items-baseline gap-1">
+                <span class="exsit-price"><?php echo esc_html($settings['price']); ?></span>
+                <span class="exsit-billing"><?php echo esc_html($settings['billing_text']); ?></span>
+            </div>
+
+            <div class="border-top border-gray-800"></div>
+
+            <?php $this->render_button($settings); ?>
+
+            <div class="border-top border-gray-800"></div>
+
+            <?php $this->render_features($settings); ?>
+
+            <?php $this->render_extra_sections($settings); ?>
+
         </div>
 
         <?php
