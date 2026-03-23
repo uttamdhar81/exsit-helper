@@ -17,7 +17,7 @@ class Exsit_Slick_Slider extends Widget_Base
 
     public function get_title()
     {
-        return __('Exsit Slick Slider', 'exsit-addons');
+        return __('Feature Slider', 'exsit-addons');
     }
 
     public function get_icon()
@@ -32,7 +32,7 @@ class Exsit_Slick_Slider extends Widget_Base
 
     public function get_script_depends()
     {
-        return ['exsit-slick', 'exsit-addons'];
+        return ['exsit-slick', 'exsit-helper'];
     }
 
     public function get_style_depends()
@@ -269,25 +269,7 @@ class Exsit_Slick_Slider extends Widget_Base
             </div>
         </div>
 
-        <script>
-            jQuery(document).ready(function ($) {
-
-                var slider = $('#<?php echo esc_js($slider_id); ?>');
-
-                if (!slider.hasClass('slick-initialized')) {
-
-                    slider.slick({
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        autoplay: <?php echo ($settings['autoplay'] === 'yes') ? 'true' : 'false'; ?>,
-                        arrows: true,
-                        dots: true
-                    });
-
-                }
-
-            });
-        </script>
+        
 
         <?php
     }
