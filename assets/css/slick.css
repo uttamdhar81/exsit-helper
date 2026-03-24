@@ -117,3 +117,102 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+.flex-1 {
+    flex:1;
+}
+.exsit-slick-slider[data-style="style4"] .slick-dots {   
+    width: auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03);
+    display: flex;
+    padding: 8px;
+    right: auto;
+    top: auto;
+    gap:4px;
+    left: 50%;
+    position: absolute;
+    bottom: 20px;
+}
+.exsit-slick-slider[data-style="style1"] .slick-dots {
+    width: auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03);
+    display: flex;
+    padding: 8px;
+    right: 0rem;
+    top: 0rem;
+    gap:4px;
+    left: auto;
+    position: absolute;
+        bottom: auto;
+}
+.exsit-slick-slider[data-style="style4"] .slick-dots li.slick-active {
+    background: rgba(0, 0, 0, 0.3);
+}
+.exsit-slick-slider[data-style="style1"] .slick-dots li.slick-active {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+
+.exsit-slick-slider[data-style="style3"],
+.exsit-slick-slider[data-style="style2"] {
+    margin: 0 -10px;
+}
+
+.exsit-slick-slider[data-style="style3"] .slick-slide,
+.exsit-slick-slider[data-style="style2"] .slick-slide {
+    padding: 0 10px;
+}
+
+.exsit-slick-slider[data-style="style3"] .slick-dots,
+.exsit-slick-slider[data-style="style2"] .slick-dots {
+    left: 50%;
+    padding: 0 1em;
+    position: absolute;
+    right: auto;
+    top:auto;
+    z-index: 1;
+    bottom: -2rem;
+    background: transparent;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0;
+    pointer-events: none;
+    gap: 0;
+}
+.exsit-slick-slider[data-style="style3"] .slick-dots li,
+.exsit-slick-slider[data-style="style2"] .slick-dots li {
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0;
+    width: 30px;
+    height: 2px;
+    border-radius: 0;
+    opacity: 1;
+}
+.exsit-slick-slider[data-style="style3"] .slick-dots li.slick-active,
+.exsit-slick-slider[data-style="style2"] .slick-dots li.slick-active {
+    background: rgba(255, 255, 255, 1);
+}
+
+.exsit-slick-slider[data-style="style5"] .slick-arrow {
+    top:auto;
+    bottom:0;
+    transform: none;
+    right:30%;
+    left:auto;
+}
+.exsit-slick-slider[data-style="style5"] .slick-arrow.slick-prev {
+    transform: translateX(-45px);
+}
+@media screen and (max-width: 990px) {
+    .exsit-slick-slider[data-style="style5"] .slick-arrow {
+        right:0;
+    }
+}

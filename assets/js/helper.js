@@ -92,6 +92,65 @@
             }
         );
 
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/exsit_feedback_slider.default',
+            function ($scope) {
+
+                let slider = $scope.find('.exsit-slick-slider');
+
+                let autoplay = slider.data('autoplay');
+                let dots = slider.data('dots');
+                let arrows = slider.data('arrows');
+                let autoplaySpeed = slider.data('autoplay-speed');
+
+                // ✅ SUPPORT STYLE2 + STYLE3
+                let style = slider.data('style');
+                let isMultiSlide = style === 'style2' || style === 'style3';
+
+                if (!slider.hasClass('slick-initialized')) {
+
+                    slider.slick({
+
+                        slidesToShow: isMultiSlide ? 3 : 1,
+                        slidesToScroll: 1,
+
+                        arrows: arrows,
+                        dots: dots,
+                        autoplay: autoplay,
+                        autoplaySpeed: autoplaySpeed,
+
+                        speed: 400,
+                        adaptiveHeight: true,
+
+                        // ✅ ONLY STYLE1 USES FADE
+                        ...(isMultiSlide ? {} : {
+                            fade: true,
+                            cssEase: 'linear'
+                        }),
+
+                        // ✅ RESPONSIVE FOR STYLE2 + STYLE3
+                        responsive: isMultiSlide ? [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: 2
+                                }
+                            },
+                            {
+                                breakpoint: 767,
+                                settings: {
+                                    slidesToShow: 1
+                                }
+                            }
+                        ] : []
+
+                    });
+
+                }
+
+            }
+        );
+
     });
 
 })(jQuery);
