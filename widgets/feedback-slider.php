@@ -576,15 +576,11 @@ class Exsit_Feedback_Slider extends Widget_Base
                     <?php elseif ($settings['layout_style'] === 'style4'): ?>
 
                         <div class="exsit-feedback-slide d-flex flex-column gap-4">
-                            <!-- IMAGE -->
-                            <?php if (!empty($item['bg_image']['url'])): ?>
-                                <img loading="lazy" src="<?php echo esc_url($item['bg_image']['url']); ?>" alt=""
-                                    class="w-100 rounded-4 overflow-hidden">
-                            <?php endif; ?>
+                            
                             <!-- CONTENT -->
-                            <div class="feedback-content w-100 position-absolute top-0 start-0 d-flex flex-column h-100">
+                            <div class="feedback-content w-100 position-relative top-0 start-0 d-flex flex-column h-100 rounded-4" style="background-image: url(<?php echo esc_url($item['bg_image']['url']); ?>);">
                                 <div class="row h-100">
-                                    <div class="col-xl-5 col-lg-6 p-5 h-100 d-flex flex-column justify-content-start">
+                                    <div class="col-xl-5 col-lg-6 p-lg-5 p-4 h-100 d-flex flex-column justify-content-start">
                                         <!-- RATING -->
                                         <div class="d-flex flex-column gap-0 mb-0 ps-2 text-start justify-content-start">
                                             <!-- VALUE -->
@@ -611,7 +607,7 @@ class Exsit_Feedback_Slider extends Widget_Base
 
                                         </div>
                                         <!-- TEXT -->
-                                        <p class="exsit-feedback-text my-auto ps-2">
+                                        <p class="exsit-feedback-text ps-2 my-lg-5 my-4">
                                             <?php echo esc_html($item['feedback_text']); ?>
                                         </p>
                                         <!-- Author -->
