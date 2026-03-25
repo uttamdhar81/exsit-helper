@@ -7,7 +7,7 @@ if ( class_exists( 'CSF' ) ) {
 
     CSF::createSection( 'exsit_settings', array(
 
-        'title' => esc_html__( 'Preloader', 'exsit-addons' ),
+        'title' => esc_html__( 'Preloader', 'exsit-helper' ),
         'icon'  => 'fa fa-spinner',
 
         'fields' => array(
@@ -15,11 +15,11 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'exsit_display_preloader',
                 'type'     => 'switcher',
-                'title'    => esc_html__( 'Preloader', 'exsit-addons' ),
-                'subtitle' => esc_html__( 'Switch enabled to display preloader.', 'exsit-addons' ),
+                'title'    => esc_html__( 'Preloader', 'exsit-helper' ),
+                'subtitle' => esc_html__( 'Switch enabled to display preloader.', 'exsit-helper' ),
                 'default'  => true,
-                'on'       => esc_html__( 'Enabled', 'exsit-addons' ),
-                'off'      => esc_html__( 'Disabled', 'exsit-addons' ),
+                'on'       => esc_html__( 'Enabled', 'exsit-helper' ),
+                'off'      => esc_html__( 'Disabled', 'exsit-helper' ),
             ),
 
         ),

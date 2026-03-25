@@ -20,7 +20,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
 
     public function get_title()
     {
-        return __('Team Member', 'exsit-addons');
+        return __('Team Member', 'exsit-helper');
     }
 
     public function get_icon()
@@ -30,7 +30,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     public function get_keywords()
@@ -48,7 +48,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Team Member', 'exsit-addons'),
+                'label' => __('Team Member', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -56,7 +56,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_control(
             'member_image',
             [
-                'label' => __('Image', 'exsit-addons'),
+                'label' => __('Image', 'exsit-helper'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
@@ -67,9 +67,9 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_control(
             'member_name',
             [
-                'label' => __('Name', 'exsit-addons'),
+                'label' => __('Name', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Goria Coast', 'exsit-addons'),
+                'default' => __('Goria Coast', 'exsit-helper'),
                 'label_block' => true,
             ]
         );
@@ -77,9 +77,9 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_control(
             'member_position',
             [
-                'label' => __('Position', 'exsit-addons'),
+                'label' => __('Position', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Founder and CEO', 'exsit-addons'),
+                'default' => __('Founder and CEO', 'exsit-helper'),
                 'label_block' => true,
             ]
         );
@@ -87,12 +87,12 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_control(
             'card_style',
             [
-                'label' => __('Card Style', 'exsit-addons'),
+                'label' => __('Card Style', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'style1',
                 'options' => [
-                    'style1' => __('Card Style 1', 'exsit-addons'),
-                    'style2' => __('Card Style 2', 'exsit-addons'),
+                    'style1' => __('Card Style 1', 'exsit-helper'),
+                    'style2' => __('Card Style 2', 'exsit-helper'),
                 ],
             ]
         );
@@ -108,7 +108,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->start_controls_section(
             'social_section',
             [
-                'label' => __('Social Icons', 'exsit-addons'),
+                'label' => __('Social Icons', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -118,7 +118,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $repeater->add_control(
             'social_icon',
             [
-                'label' => __('Icon', 'exsit-addons'),
+                'label' => __('Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fab fa-facebook-f',
@@ -130,7 +130,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $repeater->add_control(
             'social_link',
             [
-                'label' => __('Link', 'exsit-addons'),
+                'label' => __('Link', 'exsit-helper'),
                 'type' => Controls_Manager::URL,
                 'placeholder' => 'https://your-link.com',
                 'default' => [
@@ -142,7 +142,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $repeater->add_control(
             'icon_color',
             [
-                'label' => __('Icon Color', 'exsit-addons'),
+                'label' => __('Icon Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#000000',
             ]
@@ -151,7 +151,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $repeater->add_control(
             'icon_hover_color',
             [
-                'label' => __('Hover Color', 'exsit-addons'),
+                'label' => __('Hover Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ff0000',
             ]
@@ -160,7 +160,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_control(
             'social_icons',
             [
-                'label' => __('Social Icons', 'exsit-addons'),
+                'label' => __('Social Icons', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'title_field' => 'Social Icon',
@@ -178,7 +178,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->start_controls_section(
             'icon_style_section',
             [
-                'label' => __('Icon Style', 'exsit-addons'),
+                'label' => __('Icon Style', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -186,7 +186,7 @@ class Exsit_Team_Member_Widget extends Widget_Base
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Icon Size', 'exsit-addons'),
+                'label' => __('Icon Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

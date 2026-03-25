@@ -18,7 +18,7 @@ class Exsit_Badge_Widget extends Widget_Base
 
     public function get_title()
     {
-        return __('Badge', 'exsit-addons');
+        return __('Badge', 'exsit-helper');
     }
 
     public function get_icon()
@@ -28,7 +28,7 @@ class Exsit_Badge_Widget extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     protected function register_controls()
@@ -41,7 +41,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Badge', 'exsit-addons'),
+                'label' => __('Badge', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -49,9 +49,9 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'badge_text',
             [
-                'label' => __('Text', 'exsit-addons'),
+                'label' => __('Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Designed to evolve with business', 'exsit-addons'),
+                'default' => __('Designed to evolve with business', 'exsit-helper'),
                 'label_block' => true,
             ]
         );
@@ -59,7 +59,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'badge_icon',
             [
-                'label' => __('Icon', 'exsit-addons'),
+                'label' => __('Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
             ]
         );
@@ -67,16 +67,16 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'icon_position',
             [
-                'label' => __('Icon Position', 'exsit-addons'),
+                'label' => __('Icon Position', 'exsit-helper'),
                 'type' => Controls_Manager::CHOOSE,
                 'default' => 'before',
                 'options' => [
                     'before' => [
-                        'title' => __('Before', 'exsit-addons'),
+                        'title' => __('Before', 'exsit-helper'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'after' => [
-                        'title' => __('After', 'exsit-addons'),
+                        'title' => __('After', 'exsit-helper'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -93,7 +93,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->start_controls_section(
             'text_style',
             [
-                'label' => __('Text', 'exsit-addons'),
+                'label' => __('Text', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -109,7 +109,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'text_color',
             [
-                'label' => __('Text Color', 'exsit-addons'),
+                'label' => __('Text Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge' => 'color: {{VALUE}}',
@@ -127,7 +127,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->start_controls_section(
             'icon_style',
             [
-                'label' => __('Icon', 'exsit-addons'),
+                'label' => __('Icon', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -135,7 +135,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Icon Size', 'exsit-addons'),
+                'label' => __('Icon Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge i' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -147,7 +147,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'icon_color',
             [
-                'label' => __('Icon Color', 'exsit-addons'),
+                'label' => __('Icon Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge i' => 'color: {{VALUE}}',
@@ -166,7 +166,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->start_controls_section(
             'badge_style',
             [
-                'label' => __('Badge', 'exsit-addons'),
+                'label' => __('Badge', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -174,7 +174,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_control(
             'badge_bg',
             [
-                'label' => __('Background', 'exsit-addons'),
+                'label' => __('Background', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge' => 'background-color: {{VALUE}}',
@@ -193,7 +193,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_responsive_control(
             'badge_radius',
             [
-                'label' => __('Border Radius', 'exsit-addons'),
+                'label' => __('Border Radius', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge' => 'border-radius: {{SIZE}}px',
@@ -204,7 +204,7 @@ class Exsit_Badge_Widget extends Widget_Base
         $this->add_responsive_control(
             'badge_padding',
             [
-                'label' => __('Padding', 'exsit-addons'),
+                'label' => __('Padding', 'exsit-helper'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-badge' =>

@@ -17,7 +17,7 @@ class Exsit_Slick_Slider extends Widget_Base
 
     public function get_title()
     {
-        return __('Feature Slider', 'exsit-addons');
+        return __('Feature Slider', 'exsit-helper');
     }
 
     public function get_icon()
@@ -27,7 +27,7 @@ class Exsit_Slick_Slider extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     public function get_script_depends()
@@ -46,7 +46,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Slides', 'exsit-addons'),
+                'label' => __('Slides', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -56,7 +56,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $repeater->add_control(
             'image',
             [
-                'label' => __('Image', 'exsit-addons'),
+                'label' => __('Image', 'exsit-helper'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -67,25 +67,25 @@ class Exsit_Slick_Slider extends Widget_Base
         $repeater->add_control(
             'title',
             [
-                'label' => __('Title', 'exsit-addons'),
+                'label' => __('Title', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Slide Title', 'exsit-addons'),
+                'default' => __('Slide Title', 'exsit-helper'),
             ]
         );
 
         $repeater->add_control(
             'description',
             [
-                'label' => __('Description', 'exsit-addons'),
+                'label' => __('Description', 'exsit-helper'),
                 'type' => Controls_Manager::TEXTAREA,
-                'default' => __('Slide description', 'exsit-addons'),
+                'default' => __('Slide description', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'slides',
             [
-                'label' => __('Slides', 'exsit-addons'),
+                'label' => __('Slides', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [],
@@ -96,7 +96,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'autoplay',
             [
-                'label' => __('Autoplay', 'exsit-addons'),
+                'label' => __('Autoplay', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => 'Yes',
                 'label_off' => 'No',
@@ -107,7 +107,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'dots',
             [
-                'label' => __('Dots', 'exsit-addons'),
+                'label' => __('Dots', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => 'Show',
                 'label_off' => 'Hide',
@@ -118,7 +118,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'arrows',
             [
-                'label' => __('Arrows', 'exsit-addons'),
+                'label' => __('Arrows', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => 'Show',
                 'label_off' => 'Hide',
@@ -129,7 +129,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'autoplay_speed',
             [
-                'label' => __('Autoplay Speed (ms)', 'exsit-addons'),
+                'label' => __('Autoplay Speed (ms)', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3000,
                 'min' => 1000,
@@ -145,7 +145,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->start_controls_section(
             'style_section',
             [
-                'label' => __('Content Style', 'exsit-addons'),
+                'label' => __('Content Style', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -157,7 +157,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'title_heading',
             [
-                'label' => __('Title', 'exsit-addons'),
+                'label' => __('Title', 'exsit-helper'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -173,7 +173,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'title_color',
             [
-                'label' => __('Title Color', 'exsit-addons'),
+                'label' => __('Title Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-slide-title' => 'color: {{VALUE}};',
@@ -189,7 +189,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'desc_heading',
             [
-                'label' => __('Description', 'exsit-addons'),
+                'label' => __('Description', 'exsit-helper'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -206,7 +206,7 @@ class Exsit_Slick_Slider extends Widget_Base
         $this->add_control(
             'desc_color',
             [
-                'label' => __('Description Color', 'exsit-addons'),
+                'label' => __('Description Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-slide-desc' => 'color: {{VALUE}};',

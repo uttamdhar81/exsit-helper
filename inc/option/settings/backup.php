@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( class_exists( 'CSF' ) ) {
 
     CSF::createSection( 'exsit_settings', array(
-        'title'       => esc_html__( 'Backup', 'exsit-addons' ),
+        'title'       => esc_html__( 'Backup', 'exsit-helper' ),
         'icon'        => 'fas fa-shield-alt',
-        'description' => esc_html__( 'Backup theme options data.', 'exsit-addons' ),
+        'description' => esc_html__( 'Backup theme options data.', 'exsit-helper' ),
         'fields'      => array(
             array(
                 'type' => 'backup',

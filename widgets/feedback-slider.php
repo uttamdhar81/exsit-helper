@@ -17,7 +17,7 @@ class Exsit_Feedback_Slider extends Widget_Base
 
     public function get_title()
     {
-        return __('Feedback Slider', 'exsit-addons');
+        return __('Feedback Slider', 'exsit-helper');
     }
 
     public function get_icon()
@@ -27,7 +27,7 @@ class Exsit_Feedback_Slider extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     public function get_script_depends()
@@ -46,7 +46,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Feedback Items', 'exsit-addons'),
+                'label' => __('Feedback Items', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -54,15 +54,15 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'layout_style',
             [
-                'label' => __('Style', 'exsit-addons'),
+                'label' => __('Style', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'style1',
                 'options' => [
-                    'style1' => __('Style 1 ', 'exsit-addons'),
-                    'style2' => __('Style 2 ', 'exsit-addons'),
-                    'style3' => __('Style 3 ', 'exsit-addons'),
-                    'style4' => __('Style 4 ', 'exsit-addons'),
-                    'style5' => __('Style 5 ', 'exsit-addons'),
+                    'style1' => __('Style 1 ', 'exsit-helper'),
+                    'style2' => __('Style 2 ', 'exsit-helper'),
+                    'style3' => __('Style 3 ', 'exsit-helper'),
+                    'style4' => __('Style 4 ', 'exsit-helper'),
+                    'style5' => __('Style 5 ', 'exsit-helper'),
                 ],
             ]
         );
@@ -73,7 +73,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'brand_image',
             [
-                'label' => __('Brand Logo', 'exsit-addons'),
+                'label' => __('Brand Logo', 'exsit-helper'),
                 'type' => Controls_Manager::MEDIA,
             ]
         );
@@ -81,7 +81,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'bg_image',
             [
-                'label' => __('Background Image', 'exsit-addons'),
+                'label' => __('Background Image', 'exsit-helper'),
                 'type' => Controls_Manager::MEDIA,
             ]
         );
@@ -89,7 +89,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'user_image',
             [
-                'label' => __('User Image', 'exsit-addons'),
+                'label' => __('User Image', 'exsit-helper'),
                 'type' => Controls_Manager::MEDIA,
             ]
         );
@@ -97,7 +97,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'user_name',
             [
-                'label' => __('User Name', 'exsit-addons'),
+                'label' => __('User Name', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'John Doe',
             ]
@@ -106,7 +106,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'user_role',
             [
-                'label' => __('User Role', 'exsit-addons'),
+                'label' => __('User Role', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'CEO, Company',
             ]
@@ -115,7 +115,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'feedback_text',
             [
-                'label' => __('Feedback Text', 'exsit-addons'),
+                'label' => __('Feedback Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => 'Amazing service and support!',
             ]
@@ -124,7 +124,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'rating_value',
             [
-                'label' => __('Rating Value', 'exsit-addons'),
+                'label' => __('Rating Value', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 4.5,
                 'step' => 0.1,
@@ -134,7 +134,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $repeater->add_control(
             'rating_count',
             [
-                'label' => __('Rating Count', 'exsit-addons'),
+                'label' => __('Rating Count', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '{ 2.3k + Reviews }',
             ]
@@ -142,7 +142,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'feedbacks',
             [
-                'label' => __('Feedback List', 'exsit-addons'),
+                'label' => __('Feedback List', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{{ user_name }}}',
@@ -151,19 +151,19 @@ class Exsit_Feedback_Slider extends Widget_Base
 
         // Slider options (same as your first widget)
         $this->add_control('autoplay', [
-            'label' => __('Autoplay', 'exsit-addons'),
+            'label' => __('Autoplay', 'exsit-helper'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
         ]);
 
         $this->add_control('dots', [
-            'label' => __('Dots', 'exsit-addons'),
+            'label' => __('Dots', 'exsit-helper'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'yes',
         ]);
 
         $this->add_control('arrows', [
-            'label' => __('Arrows', 'exsit-addons'),
+            'label' => __('Arrows', 'exsit-helper'),
             'type' => Controls_Manager::SWITCHER,
             'default' => 'no',
         ]);
@@ -177,7 +177,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_wrapper_style',
             [
-                'label' => __('Wrapper Card', 'exsit-addons'),
+                'label' => __('Wrapper Card', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -185,7 +185,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'wrapper_bg',
             [
-                'label' => __('Background Color', 'exsit-addons'),
+                'label' => __('Background Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .feedback-slider-wrapper' => 'background-color: {{VALUE}};',
@@ -196,7 +196,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_responsive_control(
             'wrapper_padding',
             [
-                'label' => __('Padding', 'exsit-addons'),
+                'label' => __('Padding', 'exsit-helper'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -208,7 +208,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_responsive_control(
             'wrapper_radius',
             [
-                'label' => __('Border Radius', 'exsit-addons'),
+                'label' => __('Border Radius', 'exsit-helper'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .feedback-slider-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -221,7 +221,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_feedback_style',
             [
-                'label' => __('Feedback Text', 'exsit-addons'),
+                'label' => __('Feedback Text', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -237,7 +237,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'feedback_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-feedback-text' => 'color: {{VALUE}};',
@@ -250,7 +250,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_author_name_style',
             [
-                'label' => __('Author Name', 'exsit-addons'),
+                'label' => __('Author Name', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -266,7 +266,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'author_name_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-user-name' => 'color: {{VALUE}};',
@@ -279,7 +279,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_author_role_style',
             [
-                'label' => __('Author Role', 'exsit-addons'),
+                'label' => __('Author Role', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -295,7 +295,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'author_role_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-user-role' => 'color: {{VALUE}};',
@@ -308,7 +308,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_author_image_style',
             [
-                'label' => __('Author Image', 'exsit-addons'),
+                'label' => __('Author Image', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -316,7 +316,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_responsive_control(
             'author_image_size',
             [
-                'label' => __('Size', 'exsit-addons'),
+                'label' => __('Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -335,7 +335,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_brand_image_style',
             [
-                'label' => __('Brand Image', 'exsit-addons'),
+                'label' => __('Brand Image', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -343,7 +343,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_responsive_control(
             'brand_image_size',
             [
-                'label' => __('Size', 'exsit-addons'),
+                'label' => __('Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -362,7 +362,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->start_controls_section(
             'section_rating_style',
             [
-                'label' => __('Rating', 'exsit-addons'),
+                'label' => __('Rating', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -374,7 +374,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_star_full',
             [
-                'label' => __('Full Star Icon', 'exsit-addons'),
+                'label' => __('Full Star Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-star',
@@ -387,7 +387,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_star_empty',
             [
-                'label' => __('Empty Star Icon', 'exsit-addons'),
+                'label' => __('Empty Star Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'far fa-star',
@@ -399,7 +399,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_responsive_control(
             'rating_star_size',
             [
-                'label' => __('Star Size', 'exsit-addons'),
+                'label' => __('Star Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -417,7 +417,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_color',
             [
-                'label' => __('Star Color', 'exsit-addons'),
+                'label' => __('Star Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-rating-stars i' => 'color: {{VALUE}};',
@@ -433,7 +433,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_value_heading',
             [
-                'label' => __('Rating Value', 'exsit-addons'),
+                'label' => __('Rating Value', 'exsit-helper'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -450,7 +450,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_value_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-rating-value' => 'color: {{VALUE}};',
@@ -465,7 +465,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_count_heading',
             [
-                'label' => __('Rating Count', 'exsit-addons'),
+                'label' => __('Rating Count', 'exsit-helper'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -482,7 +482,7 @@ class Exsit_Feedback_Slider extends Widget_Base
         $this->add_control(
             'rating_count_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-rating-count' => 'color: {{VALUE}};',

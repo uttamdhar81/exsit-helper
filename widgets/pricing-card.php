@@ -19,7 +19,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
     public function get_title()
     {
-        return __('Pricing Card', 'exsit-addons');
+        return __('Pricing Card', 'exsit-helper');
     }
 
     public function get_icon()
@@ -29,7 +29,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     protected function register_controls()
@@ -42,21 +42,21 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Content', 'exsit-addons'),
+                'label' => __('Content', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'layout_style',
             [
-                'label' => __('Layout Style', 'exsit-addons'),
+                'label' => __('Layout Style', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'style1',
                 'options' => [
-                    'style1' => __('Style 1', 'exsit-addons'),
-                    'style2' => __('Style 2', 'exsit-addons'),
-                    'style3' => __('Style 3', 'exsit-addons'),
-                    'style4' => __('Style 4', 'exsit-addons'),
+                    'style1' => __('Style 1', 'exsit-helper'),
+                    'style2' => __('Style 2', 'exsit-helper'),
+                    'style3' => __('Style 3', 'exsit-helper'),
+                    'style4' => __('Style 4', 'exsit-helper'),
                 ],
             ]
         );
@@ -64,7 +64,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'plan_title',
             [
-                'label' => __('Title', 'exsit-addons'),
+                'label' => __('Title', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'Startup',
             ]
@@ -73,7 +73,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'plan_desc',
             [
-                'label' => __('Description', 'exsit-addons'),
+                'label' => __('Description', 'exsit-helper'),
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => 'Best for startup business owners who needs for business.',
             ]
@@ -82,7 +82,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'price',
             [
-                'label' => __('Price', 'exsit-addons'),
+                'label' => __('Price', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '$29',
             ]
@@ -91,7 +91,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'billing_text',
             [
-                'label' => __('Billing Text', 'exsit-addons'),
+                'label' => __('Billing Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '/ month',
             ]
@@ -107,14 +107,14 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'button_section',
             [
-                'label' => __('Button', 'exsit-addons'),
+                'label' => __('Button', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'button_text',
             [
-                'label' => __('Button Text', 'exsit-addons'),
+                'label' => __('Button Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'Start trial for 14 days',
             ]
@@ -123,7 +123,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_link',
             [
-                'label' => __('Button Link', 'exsit-addons'),
+                'label' => __('Button Link', 'exsit-helper'),
                 'type' => Controls_Manager::URL,
             ]
         );
@@ -131,7 +131,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_icon',
             [
-                'label' => __('Icon', 'exsit-addons'),
+                'label' => __('Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
             ]
         );
@@ -139,7 +139,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_icon_color',
             [
-                'label' => __('Icon Color', 'exsit-addons'),
+                'label' => __('Icon Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn i' => 'color: {{VALUE}}',
@@ -151,16 +151,16 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'icon_position',
             [
-                'label' => __('Icon Position', 'exsit-addons'),
+                'label' => __('Icon Position', 'exsit-helper'),
                 'type' => Controls_Manager::CHOOSE,
                 'default' => 'after',
                 'options' => [
                     'before' => [
-                        'title' => __('Before', 'exsit-addons'),
+                        'title' => __('Before', 'exsit-helper'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'after' => [
-                        'title' => __('After', 'exsit-addons'),
+                        'title' => __('After', 'exsit-helper'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -174,7 +174,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Icon Spacing', 'exsit-addons'),
+                'label' => __('Icon Spacing', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -202,7 +202,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'features_section',
             [
-                'label' => __('Features', 'exsit-addons'),
+                'label' => __('Features', 'exsit-helper'),
             ]
         );
 
@@ -211,7 +211,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $repeater->add_control(
             'feature_icon',
             [
-                'label' => __('Icon', 'exsit-addons'),
+                'label' => __('Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-check-circle',
@@ -223,7 +223,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $repeater->add_control(
             'feature_text',
             [
-                'label' => __('Feature Text', 'exsit-addons'),
+                'label' => __('Feature Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '10 GB disk space availability',
             ]
@@ -232,7 +232,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'features',
             [
-                'label' => __('Features', 'exsit-addons'),
+                'label' => __('Features', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{{ feature_text }}}',
@@ -246,7 +246,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'extra_sections',
             [
-                'label' => __('Extra Sections', 'exsit-addons'),
+                'label' => __('Extra Sections', 'exsit-helper'),
             ]
         );
 
@@ -255,7 +255,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $section_repeater->add_control(
             'section_title',
             [
-                'label' => __('Section Title', 'exsit-addons'),
+                'label' => __('Section Title', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'What you can do',
             ]
@@ -266,7 +266,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $item_repeater->add_control(
             'item_text',
             [
-                'label' => __('Item Text', 'exsit-addons'),
+                'label' => __('Item Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'Customize your booking page',
             ]
@@ -275,7 +275,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $section_repeater->add_control(
             'items',
             [
-                'label' => __('Items', 'exsit-addons'),
+                'label' => __('Items', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $item_repeater->get_controls(),
                 'title_field' => '{{{ item_text }}}',
@@ -285,7 +285,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'extra_lists',
             [
-                'label' => __('Sections', 'exsit-addons'),
+                'label' => __('Sections', 'exsit-helper'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $section_repeater->get_controls(),
                 'title_field' => '{{{ section_title }}}',
@@ -301,7 +301,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'badge_section',
             [
-                'label' => __('Top Badge', 'exsit-addons'),
+                'label' => __('Top Badge', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -309,16 +309,16 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'badge_text',
             [
-                'label' => __('Badge Text', 'exsit-addons'),
+                'label' => __('Badge Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'placeholder' => __('Get 20% Off', 'exsit-addons'),
+                'placeholder' => __('Get 20% Off', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'badge_icon',
             [
-                'label' => __('Badge Icon', 'exsit-addons'),
+                'label' => __('Badge Icon', 'exsit-helper'),
                 'type' => Controls_Manager::ICONS,
             ]
         );
@@ -333,7 +333,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'card_style',
             [
-                'label' => __('Card Style', 'exsit-addons'),
+                'label' => __('Card Style', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -341,7 +341,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'border_color',
             [
-                'label' => __('Border Color', 'exsit-addons'),
+                'label' => __('Border Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-card' => 'border-color: {{VALUE}};',
@@ -352,7 +352,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'border_width',
             [
-                'label' => __('Border Width', 'exsit-addons'),
+                'label' => __('Border Width', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -370,14 +370,14 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'border_style',
             [
-                'label' => __('Border Style', 'exsit-addons'),
+                'label' => __('Border Style', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'solid',
                 'options' => [
-                    'solid' => __('Solid', 'exsit-addons'),
-                    'dashed' => __('Dashed', 'exsit-addons'),
-                    'dotted' => __('Dotted', 'exsit-addons'),
-                    'double' => __('Double', 'exsit-addons'),
+                    'solid' => __('Solid', 'exsit-helper'),
+                    'dashed' => __('Dashed', 'exsit-helper'),
+                    'dotted' => __('Dotted', 'exsit-helper'),
+                    'double' => __('Double', 'exsit-helper'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-card' => 'border-style: {{VALUE}};',
@@ -388,7 +388,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'card_bg_color',
             [
-                'label' => __('Background Color', 'exsit-addons'),
+                'label' => __('Background Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-card' => 'background-color: {{VALUE}};',
@@ -406,7 +406,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'title_style',
             [
-                'label' => __('Title', 'exsit-addons'),
+                'label' => __('Title', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -414,7 +414,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'title_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-title' => 'color: {{VALUE}}',
@@ -440,7 +440,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'desc_style',
             [
-                'label' => __('Description', 'exsit-addons'),
+                'label' => __('Description', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -448,7 +448,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'desc_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-desc' => 'color: {{VALUE}}',
@@ -474,7 +474,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'price_style',
             [
-                'label' => __('Price', 'exsit-addons'),
+                'label' => __('Price', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -482,7 +482,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'price_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price' => 'color: {{VALUE}}',
@@ -508,7 +508,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'billing_style',
             [
-                'label' => __('Billing Text', 'exsit-addons'),
+                'label' => __('Billing Text', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -516,7 +516,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'billing_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-billing' => 'color: {{VALUE}}',
@@ -541,7 +541,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'button_style',
             [
-                'label' => __('Button', 'exsit-addons'),
+                'label' => __('Button', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -557,7 +557,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_text_color',
             [
-                'label' => __('Text Color', 'exsit-addons'),
+                'label' => __('Text Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn' => 'color: {{VALUE}}',
@@ -568,7 +568,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_bg_color',
             [
-                'label' => __('Background Color', 'exsit-addons'),
+                'label' => __('Background Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn' => 'background-color: {{VALUE}}',
@@ -579,7 +579,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_hover_color',
             [
-                'label' => __('Hover Text Color', 'exsit-addons'),
+                'label' => __('Hover Text Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn:hover' => 'color: {{VALUE}}',
@@ -590,7 +590,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'button_hover_bg',
             [
-                'label' => __('Hover Background', 'exsit-addons'),
+                'label' => __('Hover Background', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn:hover' => 'background-color: {{VALUE}}',
@@ -603,7 +603,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'button_icon_size',
             [
-                'label' => __('Icon Size', 'exsit-addons'),
+                'label' => __('Icon Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -622,7 +622,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'button_padding',
             [
-                'label' => __('Padding', 'exsit-addons'),
+                'label' => __('Padding', 'exsit-helper'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
@@ -635,7 +635,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'button_radius',
             [
-                'label' => __('Border Radius', 'exsit-addons'),
+                'label' => __('Border Radius', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-btn' => 'border-radius: {{SIZE}}px;',
@@ -652,7 +652,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'feature_text_style',
             [
-                'label' => __('Feature Text', 'exsit-addons'),
+                'label' => __('Feature Text', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -660,7 +660,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'feature_text_color',
             [
-                'label' => __('Text Color', 'exsit-addons'),
+                'label' => __('Text Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-feature-text' => 'color: {{VALUE}}',
@@ -683,7 +683,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'extra_section_title_style',
             [
-                'label' => __('Extra Section Title', 'exsit-addons'),
+                'label' => __('Extra Section Title', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -691,7 +691,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'extra_title_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-extra-title' => 'color: {{VALUE}}',
@@ -710,7 +710,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'item_text_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-extra-item' => 'color: {{VALUE}}',
@@ -735,7 +735,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'feature_icon_style',
             [
-                'label' => __('Feature Icon', 'exsit-addons'),
+                'label' => __('Feature Icon', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -743,7 +743,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'feature_icon_color',
             [
-                'label' => __('Icon Color', 'exsit-addons'),
+                'label' => __('Icon Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-feature-icon' => 'color: {{VALUE}}',
@@ -754,7 +754,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'feature_icon_size',
             [
-                'label' => __('Icon Size', 'exsit-addons'),
+                'label' => __('Icon Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -773,7 +773,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Icon Spacing', 'exsit-addons'),
+                'label' => __('Icon Spacing', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-feature-icon' => 'margin-right: {{SIZE}}px;',
@@ -790,7 +790,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'badge_style',
             [
-                'label' => __('Badge Style', 'exsit-addons'),
+                'label' => __('Badge Style', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -806,7 +806,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'badge_text_color',
             [
-                'label' => __('Text Color', 'exsit-addons'),
+                'label' => __('Text Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-badge' => 'color: {{VALUE}}',
@@ -817,7 +817,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'badge_bg_color',
             [
-                'label' => __('Background Color', 'exsit-addons'),
+                'label' => __('Background Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-badge' => 'background-color: {{VALUE}}',
@@ -828,7 +828,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_control(
             'badge_border_color',
             [
-                'label' => __('Border Color', 'exsit-addons'),
+                'label' => __('Border Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-price-badge' => 'border-color: {{VALUE}}',
@@ -839,7 +839,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'badge_icon_size',
             [
-                'label' => __('Icon Size', 'exsit-addons'),
+                'label' => __('Icon Size', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

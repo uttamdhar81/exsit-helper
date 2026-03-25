@@ -17,7 +17,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
     public function get_title()
     {
-        return __('Blog Card', 'exsit-addons');
+        return __('Blog Card', 'exsit-helper');
     }
 
     public function get_icon()
@@ -27,7 +27,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     protected function register_controls()
@@ -40,20 +40,20 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'layout_section',
             [
-                'label' => __('Layout', 'exsit-addons'),
+                'label' => __('Layout', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'layout_style',
             [
-                'label' => __('Layout Style', 'exsit-addons'),
+                'label' => __('Layout Style', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'style1',
                 'options' => [
-                    'style1' => __('Style 1', 'exsit-addons'),
-                    'style2' => __('Style 2', 'exsit-addons'),
-                    'style3' => __('Style 3', 'exsit-addons'),
+                    'style1' => __('Style 1', 'exsit-helper'),
+                    'style2' => __('Style 2', 'exsit-helper'),
+                    'style3' => __('Style 3', 'exsit-helper'),
                 ],
             ]
         );
@@ -61,7 +61,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'style3_min_height',
             [
-                'label' => __('Min Height', 'exsit-addons'),
+                'label' => __('Min Height', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'vh'],
                 'range' => [
@@ -87,7 +87,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'exsit-addons'),
+                'label' => __('Posts Per Page', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3,
             ]
@@ -96,7 +96,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'columns',
             [
-                'label' => __('Columns', 'exsit-addons'),
+                'label' => __('Columns', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '3',
                 'options' => [
@@ -110,14 +110,14 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'image_size',
             [
-                'label' => __('Image Resolution', 'exsit-addons'),
+                'label' => __('Image Resolution', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'large',
                 'options' => [
-                    'thumbnail' => __('Thumbnail', 'exsit-addons'),
-                    'medium' => __('Medium', 'exsit-addons'),
-                    'large' => __('Large', 'exsit-addons'),
-                    'full' => __('Full', 'exsit-addons'),
+                    'thumbnail' => __('Thumbnail', 'exsit-helper'),
+                    'medium' => __('Medium', 'exsit-helper'),
+                    'large' => __('Large', 'exsit-helper'),
+                    'full' => __('Full', 'exsit-helper'),
                 ],
             ]
         );
@@ -125,7 +125,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'image_ratio',
             [
-                'label' => __('Image Ratio', 'exsit-addons'),
+                'label' => __('Image Ratio', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -151,7 +151,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'style2_image_width',
             [
-                'label' => __('Image Width', 'exsit-addons'),
+                'label' => __('Image Width', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
@@ -186,17 +186,17 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'excerpt_section',
             [
-                'label' => __('Excerpt', 'exsit-addons'),
+                'label' => __('Excerpt', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'show_excerpt',
             [
-                'label' => __('Show Excerpt', 'exsit-addons'),
+                'label' => __('Show Excerpt', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'exsit-addons'),
-                'label_off' => __('Hide', 'exsit-addons'),
+                'label_on' => __('Show', 'exsit-helper'),
+                'label_off' => __('Hide', 'exsit-helper'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -205,7 +205,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'excerpt_length',
             [
-                'label' => __('Excerpt Length', 'exsit-addons'),
+                'label' => __('Excerpt Length', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 24,
                 'condition' => [
@@ -217,10 +217,10 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'show_author',
             [
-                'label' => __('Show Author', 'exsit-addons'),
+                'label' => __('Show Author', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'exsit-addons'),
-                'label_off' => __('Hide', 'exsit-addons'),
+                'label_on' => __('Show', 'exsit-helper'),
+                'label_off' => __('Hide', 'exsit-helper'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -236,20 +236,20 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'query_section',
             [
-                'label' => __('Query', 'exsit-addons'),
+                'label' => __('Query', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'source',
             [
-                'label' => __('Source', 'exsit-addons'),
+                'label' => __('Source', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'latest',
                 'options' => [
-                    'latest' => __('Latest Posts', 'exsit-addons'),
-                    'manual' => __('Manual Selection', 'exsit-addons'),
-                    'exclude' => __('Exclude Posts', 'exsit-addons'),
+                    'latest' => __('Latest Posts', 'exsit-helper'),
+                    'manual' => __('Manual Selection', 'exsit-helper'),
+                    'exclude' => __('Exclude Posts', 'exsit-helper'),
                 ],
             ]
         );
@@ -257,7 +257,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'exsit-addons'),
+                'label' => __('Search & Select', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'label_block' => true,
@@ -271,7 +271,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'exclude_posts',
             [
-                'label' => __('Exclude Posts', 'exsit-addons'),
+                'label' => __('Exclude Posts', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
                 'label_block' => true,
@@ -285,7 +285,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'order_by',
             [
-                'label' => __('Order By', 'exsit-addons'),
+                'label' => __('Order By', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'date',
                 'options' => [
@@ -299,7 +299,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'exsit-addons'),
+                'label' => __('Order', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'DESC',
                 'options' => [
@@ -319,17 +319,17 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'pagination_section',
             [
-                'label' => __('Pagination', 'exsit-addons'),
+                'label' => __('Pagination', 'exsit-helper'),
             ]
         );
 
         $this->add_control(
             'pagination',
             [
-                'label' => __('Enable Pagination', 'exsit-addons'),
+                'label' => __('Enable Pagination', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'exsit-addons'),
-                'label_off' => __('No', 'exsit-addons'),
+                'label_on' => __('Yes', 'exsit-helper'),
+                'label_off' => __('No', 'exsit-helper'),
                 'return_value' => 'yes',
                 'default' => '',
             ]
@@ -338,12 +338,12 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'pagination_type',
             [
-                'label' => __('Pagination Type', 'exsit-addons'),
+                'label' => __('Pagination Type', 'exsit-helper'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'numbers',
                 'options' => [
-                    'numbers' => __('Numbers', 'exsit-addons'),
-                    'loadmore' => __('Load More Button', 'exsit-addons'),
+                    'numbers' => __('Numbers', 'exsit-helper'),
+                    'loadmore' => __('Load More Button', 'exsit-helper'),
                 ],
                 'condition' => [
                     'pagination' => 'yes'
@@ -354,9 +354,9 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'load_more_text',
             [
-                'label' => __('Load More Text', 'exsit-addons'),
+                'label' => __('Load More Text', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Load more', 'exsit-addons'),
+                'default' => __('Load more', 'exsit-helper'),
                 'condition' => [
                     'pagination' => 'yes',
                     'pagination_type' => 'loadmore'
@@ -374,7 +374,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'card_style_section',
             [
-                'label' => __('Card', 'exsit-addons'),
+                'label' => __('Card', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -394,7 +394,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_responsive_control(
             'card_border_radius',
             [
-                'label' => __('Border Radius', 'exsit-addons'),
+                'label' => __('Border Radius', 'exsit-helper'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -420,7 +420,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'title_style',
             [
-                'label' => __('Post Title', 'exsit-addons'),
+                'label' => __('Post Title', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -428,7 +428,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'title_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .post-blog-title' => 'color: {{VALUE}}',
@@ -455,7 +455,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'author_style',
             [
-                'label' => __('Author Name', 'exsit-addons'),
+                'label' => __('Author Name', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -463,7 +463,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'author_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .post-blog-author' => 'color: {{VALUE}}',
@@ -489,7 +489,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'author_role_style',
             [
-                'label' => __('Author Role', 'exsit-addons'),
+                'label' => __('Author Role', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -497,7 +497,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'author_role_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .post-blog-author-role' => 'color: {{VALUE}}',
@@ -522,7 +522,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'meta_style',
             [
-                'label' => __('Post Meta', 'exsit-addons'),
+                'label' => __('Post Meta', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -530,7 +530,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'meta_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .post-blog-tag' => 'color: {{VALUE}}',
@@ -555,7 +555,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->start_controls_section(
             'excerpt_style',
             [
-                'label' => __('Excerpt Text', 'exsit-addons'),
+                'label' => __('Excerpt Text', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -563,7 +563,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $this->add_control(
             'excerpt_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .post-blog-excerpt' => 'color: {{VALUE}}',

@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( class_exists( 'CSF' ) ) {
 
     CSF::createSection( 'exsit_settings', array(
-        'title' => esc_html__( 'Custom Code', 'exsit-addons' ),
+        'title' => esc_html__( 'Custom Code', 'exsit-helper' ),
         'icon'  => 'fa fa-code',
 
         'fields' => array(
@@ -14,11 +14,11 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'    => 'exsit_custom_code_tab',
                 'type'  => 'tabbed',
-                'title' => esc_html__( 'Custom Code', 'exsit-addons' ),
+                'title' => esc_html__( 'Custom Code', 'exsit-helper' ),
                 'tabs'  => array(
 
                     array(
-                        'title'  => esc_html__( 'CSS', 'exsit-addons' ),
+                        'title'  => esc_html__( 'CSS', 'exsit-helper' ),
                         'fields' => array(
                             array(
                                 'id'       => 'exsit_css_editor',
@@ -33,7 +33,7 @@ if ( class_exists( 'CSF' ) ) {
                     ),
 
                     array(
-                        'title'  => esc_html__( 'JS', 'exsit-addons' ),
+                        'title'  => esc_html__( 'JS', 'exsit-helper' ),
                         'fields' => array(
                             array(
                                 'id'       => 'exsit_js_editor',

@@ -17,7 +17,7 @@ class Exsit_Counter_Widget extends Widget_Base
 
     public function get_title()
     {
-        return __('Counter', 'exsit-addons');
+        return __('Counter', 'exsit-helper');
     }
 
     public function get_icon()
@@ -27,7 +27,7 @@ class Exsit_Counter_Widget extends Widget_Base
 
     public function get_categories()
     {
-        return ['exsit-addons'];
+        return ['exsit-helper'];
     }
 
     protected function register_controls()
@@ -40,7 +40,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Counter', 'exsit-addons'),
+                'label' => __('Counter', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -48,7 +48,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->add_control(
             'counter_number',
             [
-                'label' => __('Number', 'exsit-addons'),
+                'label' => __('Number', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 4.5,
                 'step' => 0.1,
@@ -58,7 +58,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->add_control(
             'counter_suffix',
             [
-                'label' => __('Suffix', 'exsit-addons'),
+                'label' => __('Suffix', 'exsit-helper'),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'k',
             ]
@@ -74,7 +74,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->start_controls_section(
             'number_style',
             [
-                'label' => __('Number', 'exsit-addons'),
+                'label' => __('Number', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -90,7 +90,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->add_control(
             'number_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-counter' => 'color: {{VALUE}}',
@@ -108,7 +108,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->start_controls_section(
             'suffix_style',
             [
-                'label' => __('Suffix', 'exsit-addons'),
+                'label' => __('Suffix', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -124,7 +124,7 @@ class Exsit_Counter_Widget extends Widget_Base
         $this->add_control(
             'suffix_color',
             [
-                'label' => __('Color', 'exsit-addons'),
+                'label' => __('Color', 'exsit-helper'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .exsit-counter-suffix' => 'color: {{VALUE}}',

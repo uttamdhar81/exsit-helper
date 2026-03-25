@@ -112,9 +112,9 @@ final class Base {
     public function register_widget_category( $elements_manager ) {
 
         $elements_manager->add_category(
-            'exsit-addons',
+            'exsit-helper',
             [
-                'title' => esc_html__( 'Exsit Addons', 'exsit-addons' ),
+                'title' => esc_html__( 'Exsit Addons', 'exsit-helper' ),
                 'icon'  => 'fa fa-plug',
             ]
         );
@@ -145,7 +145,7 @@ final class Base {
     public function load_textdomain() {
 
         load_plugin_textdomain(
-            'exsit-addons',
+            'exsit-helper',
             false,
             dirname( plugin_basename( EXSIT_HELPER_PATH . 'exsit-helper.php' ) ) . '/languages'
         );
@@ -154,8 +154,8 @@ final class Base {
     public function register_theme_admin_menu() {
 
         add_menu_page(
-            esc_html__( 'Exsit Theme', 'exsit-addons' ),
-            esc_html__( 'Exsit Theme', 'exsit-addons' ),
+            esc_html__( 'Exsit Theme', 'exsit-helper' ),
+            esc_html__( 'Exsit Theme', 'exsit-helper' ),
             'manage_options',
             'exsit-theme-parent',
             [ $this, 'render_dashboard' ],
@@ -167,8 +167,8 @@ final class Base {
     public function render_dashboard() {
 
         echo '<div class="wrap">';
-        echo '<h1>' . esc_html__( 'Welcome to Exsit Theme', 'exsit-addons' ) . '</h1>';
-        echo '<p>' . esc_html__( 'Use Theme Settings to configure your site.', 'exsit-addons' ) . '</p>';
+        echo '<h1>' . esc_html__( 'Welcome to Exsit Theme', 'exsit-helper' ) . '</h1>';
+        echo '<p>' . esc_html__( 'Use Theme Settings to configure your site.', 'exsit-helper' ) . '</p>';
         echo '</div>';
     }
 

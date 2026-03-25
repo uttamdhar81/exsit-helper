@@ -7,7 +7,7 @@ if ( class_exists( 'CSF' ) ) {
 
     CSF::createSection( 'exsit_settings', array(
 
-        'title' => esc_html__( 'Page', 'exsit-addons' ),
+        'title' => esc_html__( 'Page', 'exsit-helper' ),
         'id'    => 'exsit_page_page',
         'icon'  => 'fa fa-file',
 
@@ -16,8 +16,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'exsit_page_sidebar',
                 'type'     => 'image_select',
-                'title'    => esc_html__( 'Select Layout', 'exsit-addons' ),
-                'subtitle' => esc_html__( 'Choose your page layout (no sidebar / left sidebar / right sidebar).', 'exsit-addons' ),
+                'title'    => esc_html__( 'Select Layout', 'exsit-helper' ),
+                'subtitle' => esc_html__( 'Choose your page layout (no sidebar / left sidebar / right sidebar).', 'exsit-helper' ),
                 'options'  => array(
                     '1' => EXSIT_HELPER_URL . 'assets/image/no-sidebar.png',
                     '2' => EXSIT_HELPER_URL . 'assets/image/left-sidebar.png',
@@ -29,11 +29,11 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'exsit_page_layoutopt',
                 'type'       => 'button_set',
-                'title'      => esc_html__( 'Sidebar Settings', 'exsit-addons' ),
-                'subtitle'   => esc_html__( 'Choose which sidebar to display when a sidebar layout is selected.', 'exsit-addons' ),
+                'title'      => esc_html__( 'Sidebar Settings', 'exsit-helper' ),
+                'subtitle'   => esc_html__( 'Choose which sidebar to display when a sidebar layout is selected.', 'exsit-helper' ),
                 'options'    => array(
-                    '1' => esc_html__( 'Page Sidebar', 'exsit-addons' ),
-                    '2' => esc_html__( 'Blog Sidebar', 'exsit-addons' ),
+                    '1' => esc_html__( 'Page Sidebar', 'exsit-helper' ),
+                    '2' => esc_html__( 'Blog Sidebar', 'exsit-helper' ),
                 ),
                 'default'    => '1',
                 'dependency' => array( 'exsit_page_sidebar', '!=', '1' ),
@@ -42,48 +42,48 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'exsit_page_title_switcher',
                 'type'     => 'switcher',
-                'title'    => esc_html__( 'Page Title', 'exsit-addons' ),
-                'subtitle' => esc_html__( 'Show or hide page title.', 'exsit-addons' ),
+                'title'    => esc_html__( 'Page Title', 'exsit-helper' ),
+                'subtitle' => esc_html__( 'Show or hide page title.', 'exsit-helper' ),
                 'default'  => true,
-                'on'       => esc_html__( 'Enabled', 'exsit-addons' ),
-                'off'      => esc_html__( 'Disabled', 'exsit-addons' ),
+                'on'       => esc_html__( 'Enabled', 'exsit-helper' ),
+                'off'      => esc_html__( 'Disabled', 'exsit-helper' ),
             ),
 
             array(
                 'id'         => 'exsit_page_title_tag',
                 'type'       => 'select',
                 'options'    => array(
-                    'h1' => esc_html__( 'H1', 'exsit-addons' ),
-                    'h2' => esc_html__( 'H2', 'exsit-addons' ),
-                    'h3' => esc_html__( 'H3', 'exsit-addons' ),
-                    'h4' => esc_html__( 'H4', 'exsit-addons' ),
-                    'h5' => esc_html__( 'H5', 'exsit-addons' ),
-                    'h6' => esc_html__( 'H6', 'exsit-addons' ),
+                    'h1' => esc_html__( 'H1', 'exsit-helper' ),
+                    'h2' => esc_html__( 'H2', 'exsit-helper' ),
+                    'h3' => esc_html__( 'H3', 'exsit-helper' ),
+                    'h4' => esc_html__( 'H4', 'exsit-helper' ),
+                    'h5' => esc_html__( 'H5', 'exsit-helper' ),
+                    'h6' => esc_html__( 'H6', 'exsit-helper' ),
                 ),
                 'default'    => 'h1',
-                'title'      => esc_html__( 'Title Tag', 'exsit-addons' ),
-                'subtitle'   => esc_html__( 'Select page title tag (H1–H6).', 'exsit-addons' ),
+                'title'      => esc_html__( 'Title Tag', 'exsit-helper' ),
+                'subtitle'   => esc_html__( 'Select page title tag (H1–H6).', 'exsit-helper' ),
                 'dependency' => array( 'exsit_page_title_switcher', '==', true ),
             ),
 
             array(
                 'id'           => 'exsit_breadcrumb_image',
                 'type'         => 'upload',
-                'title'        => esc_html__( 'Breadcrumb Image', 'exsit-addons' ),
+                'title'        => esc_html__( 'Breadcrumb Image', 'exsit-helper' ),
                 'library'      => 'image',
-                'button_title' => esc_html__( 'Add Image', 'exsit-addons' ),
-                'remove_title' => esc_html__( 'Remove Image', 'exsit-addons' ),
+                'button_title' => esc_html__( 'Add Image', 'exsit-helper' ),
+                'remove_title' => esc_html__( 'Remove Image', 'exsit-helper' ),
                 'preview'      => true,
             ),
 
             array(
                 'id'       => 'exsit_enable_breadcrumb',
                 'type'     => 'switcher',
-                'title'    => esc_html__( 'Breadcrumb', 'exsit-addons' ),
-                'subtitle' => esc_html__( 'Show or hide breadcrumb on pages and posts.', 'exsit-addons' ),
+                'title'    => esc_html__( 'Breadcrumb', 'exsit-helper' ),
+                'subtitle' => esc_html__( 'Show or hide breadcrumb on pages and posts.', 'exsit-helper' ),
                 'default'  => true,
-                'on'       => esc_html__( 'Show', 'exsit-addons' ),
-                'off'      => esc_html__( 'Hide', 'exsit-addons' ),
+                'on'       => esc_html__( 'Show', 'exsit-helper' ),
+                'off'      => esc_html__( 'Hide', 'exsit-helper' ),
             ),
 
         ),
