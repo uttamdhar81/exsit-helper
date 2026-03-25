@@ -362,5 +362,6 @@ class Exsit_Team_Member_Widget extends Widget_Base
 
         <?php
     }
+    
 
 }
