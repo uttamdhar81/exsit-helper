@@ -771,7 +771,7 @@ class Exsit_Pricing_Card_Widget extends Widget_Base
         );
 
         $this->add_responsive_control(
-            'icon_spacing',
+            'icon_spacing2',
             [
                 'label' => __('Icon Spacing', 'exsit-helper'),
                 'type' => Controls_Manager::SLIDER,

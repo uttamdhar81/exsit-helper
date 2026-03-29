@@ -92,6 +92,7 @@ final class Base {
             'blog-card.php'    => 'Exsit_Blog_Card_Widget',
             'slick-slider.php' => 'Exsit_Slick_Slider',
             'feedback-slider.php' => 'Exsit_Feedback_Slider',
+            'site-logo.php' => 'Exsit_Site_Logo',
         ];
 
         foreach ( $widgets as $file => $class ) {
