@@ -5,8 +5,10 @@ if (!defined('ABSPATH')) {
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Image_Size;
 
 class Exsit_Site_Logo extends Widget_Base {
+
     public function get_name() {
         return 'exsit-site-logo';
     }
@@ -29,15 +31,16 @@ class Exsit_Site_Logo extends Widget_Base {
             'content_section',
             [
                 'label' => __('Content', 'exsit-helper'),
-                'tab' => Controls_Manager::TAB_CONTENT,
+                'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
 
+        // Logo Size
         $this->add_control(
             'logo_size',
             [
-                'label' => __('Logo Size', 'exsit-helper'),
-                'type' => Controls_Manager::SLIDER,
+                'label' => __('Logo Width', 'exsit-helper'),
+                'type'  => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
                     'px' => [
@@ -56,51 +59,40 @@ class Exsit_Site_Logo extends Widget_Base {
             ]
         );
 
-        this->add_group_control(
-            \Elementor\Group_Control_Image_Size::get_type(),
-            [
-                'name' => 'logo_size', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-                'exclude' => ['custom'],
-                'include' => [],
-                'default' => 'large',
-                'condition' => [
-                    'logo_type' => 'custom',
-                ]
-            ]
-        );
-
-        
-
+        // Alignment
         $this->add_responsive_control(
             'content_align',
             [
-                'label' => __('Align', 'exsit-addons'),
-                'type' => Controls_Manager::CHOOSE,
+                'label' => __('Alignment', 'exsit-helper'),
+                'type'  => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'exsit-addons'),
-                        'icon' => 'fa fa-align-left',
+                        'title' => __('Left', 'exsit-helper'),
+                        'icon'  => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('top', 'exsit-addons'),
-                        'icon' => 'fa fa-align-center',
+                        'title' => __('Center', 'exsit-helper'),
+                        'icon'  => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'exsit-addons'),
-                        'icon' => 'fa fa-align-right',
+                        'title' => __('Right', 'exsit-helper'),
+                        'icon'  => 'fa fa-align-right',
                     ],
                 ],
-                'devices' => ['desktop', 'tablet', 'mobile'],
-                'exsit_class' => 'content-align%s-',
-                'toggle' => true,
+                'default' => 'left',
+                'toggle'  => true,
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-site-logo' => 'text-align: {{VALUE}};',
+                ],
             ]
         );
 
+        // Logo Link
         $this->add_control(
             'logo_link',
             [
                 'label' => __('Logo Link', 'exsit-helper'),
-                'type' => Controls_Manager::URL,
+                'type'  => Controls_Manager::URL,
                 'placeholder' => __('https://your-link.com', 'exsit-helper'),
                 'default' => [
                     'url' => home_url(),
@@ -114,22 +106,25 @@ class Exsit_Site_Logo extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 
+        // Get logo
         $logo_id  = get_theme_mod('custom_logo');
         $logo_url = wp_get_attachment_image_url($logo_id, 'full');
 
-        $link     = !empty($settings['logo_link']['url']) ? $settings['logo_link']['url'] : home_url();
-        $target   = !empty($settings['logo_link']['is_external']) ? ' target="_blank"' : '';
+        // Link settings
+        $link     = !empty($settings['logo_link']['url']) ? $settings['logo_link']['url'] : home_url('/');
+        $target   = !empty($settings['logo_link']['is_external']) ? ' target="_blank" rel="noopener"' : '';
         $nofollow = !empty($settings['logo_link']['nofollow']) ? ' rel="nofollow"' : '';
 
-        echo '<a class="exsit-site-logo" 
-            href="' . esc_url($link) . '" 
-            ' . $target . $nofollow . ' 
-            style="display:block; text-align:' . esc_attr($settings['content_align']) . ';">';
+        // Logo size safety
+        $width = !empty($settings['logo_size']['size']) ? $settings['logo_size']['size'] : 100;
+        $unit  = !empty($settings['logo_size']['unit']) ? $settings['logo_size']['unit'] : '%';
+
+        echo '<a class="exsit-site-logo navbar-brand light-logo logo position-relative" href="' . esc_url($link) . '"' . $target . $nofollow . '>';
 
         if (has_custom_logo() && $logo_url) {
             echo '<img src="' . esc_url($logo_url) . '" 
                         alt="' . esc_attr(get_bloginfo('name')) . '" 
-                        style="width: ' . esc_attr($settings['logo_size']['size']) . esc_attr($settings['logo_size']['unit']) . ';">';
+                        style="width:' . esc_attr($width . $unit) . ';">';
         } else {
             echo '<h1>' . esc_html(get_bloginfo('name')) . '</h1>';
         }
