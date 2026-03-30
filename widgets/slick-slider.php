@@ -98,8 +98,6 @@ class Exsit_Slick_Slider extends Widget_Base
             [
                 'label' => __('Autoplay', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => 'Yes',
-                'label_off' => 'No',
                 'default' => 'yes',
             ]
         );
@@ -109,8 +107,6 @@ class Exsit_Slick_Slider extends Widget_Base
             [
                 'label' => __('Dots', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => 'Show',
-                'label_off' => 'Hide',
                 'default' => 'yes',
             ]
         );
@@ -120,8 +116,6 @@ class Exsit_Slick_Slider extends Widget_Base
             [
                 'label' => __('Arrows', 'exsit-helper'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => 'Show',
-                'label_off' => 'Hide',
                 'default' => 'yes',
             ]
         );
@@ -132,8 +126,6 @@ class Exsit_Slick_Slider extends Widget_Base
                 'label' => __('Autoplay Speed (ms)', 'exsit-helper'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3000,
-                'min' => 1000,
-                'step' => 500,
                 'condition' => [
                     'autoplay' => 'yes',
                 ],
@@ -142,23 +134,12 @@ class Exsit_Slick_Slider extends Widget_Base
 
         $this->end_controls_section();
 
+        // STYLE
         $this->start_controls_section(
             'style_section',
             [
                 'label' => __('Content Style', 'exsit-helper'),
                 'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        /* -----------------------
-        TITLE STYLE
-        ----------------------- */
-
-        $this->add_control(
-            'title_heading',
-            [
-                'label' => __('Title', 'exsit-helper'),
-                'type' => Controls_Manager::HEADING,
             ]
         );
 
@@ -181,20 +162,6 @@ class Exsit_Slick_Slider extends Widget_Base
             ]
         );
 
-
-        /* -----------------------
-        DESCRIPTION STYLE
-        ----------------------- */
-
-        $this->add_control(
-            'desc_heading',
-            [
-                'label' => __('Description', 'exsit-helper'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
@@ -214,6 +181,22 @@ class Exsit_Slick_Slider extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'image_min_height',
+            [
+                'label' => __('Image Min Height', 'exsit-helper'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'default' => [
+                    'size' => 320,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .exsit-slide img' => 'min-height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -221,37 +204,51 @@ class Exsit_Slick_Slider extends Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
-        $slider_id = 'exsit-slick-' . $this->get_id();
+
         $autoplay = ($settings['autoplay'] === 'yes') ? 'true' : 'false';
         $dots = ($settings['dots'] === 'yes') ? 'true' : 'false';
         $arrows = ($settings['arrows'] === 'yes') ? 'true' : 'false';
         $autoplay_speed = !empty($settings['autoplay_speed']) ? $settings['autoplay_speed'] : 3000;
 
-
         ?>
+
         <div class="exsit-slider-wrapper">
-            <div class="exsit-slick-slider" data-autoplay="<?php echo esc_attr($autoplay); ?>"
-                data-dots="<?php echo esc_attr($dots); ?>" data-arrows="<?php echo esc_attr($arrows); ?>"
+            <div class="exsit-slick-slider"
+                data-autoplay="<?php echo esc_attr($autoplay); ?>"
+                data-dots="<?php echo esc_attr($dots); ?>"
+                data-arrows="<?php echo esc_attr($arrows); ?>"
                 data-autoplay-speed="<?php echo esc_attr($autoplay_speed); ?>">
 
                 <?php foreach ($settings['slides'] as $slide): ?>
 
                     <div class="exsit-slide position-relative">
 
-                        <?php if (!empty($slide['image']['url'])): ?>
-                            <img src="<?php echo esc_url($slide['image']['url']); ?>" alt="">
-                        <?php endif; ?>
+                        <?php
+                        $image_id = !empty($slide['image']['id']) ? $slide['image']['id'] : '';
+
+                        if ($image_id) {
+                            echo wp_get_attachment_image(
+                                $image_id,
+                                'full',
+                                false,
+                                [
+                                    'class' => 'exsit-slide-img',
+                                    'loading' => 'lazy',
+                                ]
+                            );
+                        }
+                        ?>
 
                         <div class="exsit-slide-content d-flex flex-column p-4 position-absolute bottom-0 w-100 z-index-1">
 
                             <?php if (!empty($slide['title'])): ?>
-                                <span class="exsit-slide-title mb-0">
+                                <span class="exsit-slide-title">
                                     <?php echo esc_html($slide['title']); ?>
                                 </span>
                             <?php endif; ?>
 
                             <?php if (!empty($slide['description'])): ?>
-                                <p class="exsit-slide-desc mb-0">
+                                <p class="exsit-slide-desc">
                                     <?php echo esc_html($slide['description']); ?>
                                 </p>
                             <?php endif; ?>
@@ -263,13 +260,12 @@ class Exsit_Slick_Slider extends Widget_Base
                 <?php endforeach; ?>
 
             </div>
+
             <div class="exsit-slider-counter p-4 position-absolute bottom-0 end-0 z-index-2 bg-dark text-white">
                 <span class="current">1</span> /
                 <span class="total"><?php echo count($settings['slides']); ?></span>
             </div>
         </div>
-
-        
 
         <?php
     }
