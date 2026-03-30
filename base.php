@@ -93,7 +93,7 @@ final class Base {
             'slick-slider.php' => 'Exsit_Slick_Slider',
             'feedback-slider.php' => 'Exsit_Feedback_Slider',
             'site-logo.php' => 'Exsit_Site_Logo',
-            // 'primary-menu.php' => 'Exsit_Primary_Menu',
+            'primary-menu.php' => 'Exsit_Primary_Menu',
         ];
 
         foreach ( $widgets as $file => $class ) {

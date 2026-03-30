@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) {
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Image_Size;
 
 class Exsit_Site_Logo extends Widget_Base {
 
@@ -35,6 +34,50 @@ class Exsit_Site_Logo extends Widget_Base {
             ]
         );
 
+        // Logo Type
+        $this->add_control(
+            'logo_type',
+            [
+                'label' => __('Logo Type', 'exsit-helper'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'default' => __('Default Logo (Customizer)', 'exsit-helper'),
+                    'custom'  => __('Custom Logo', 'exsit-helper'),
+                ],
+                'default' => 'default',
+            ]
+        );
+
+        // Light Logo (Custom)
+        $this->add_control(
+            'image',
+            [
+                'label' => __('Light Logo', 'exsit-helper'),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'logo_type' => 'custom',
+                ],
+            ]
+        );
+
+        // Dark Logo
+        $this->add_control(
+            'dark_logo',
+            [
+                'label' => __('Dark Logo', 'exsit-helper'),
+                'type' => Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'logo_type' => 'custom',
+                ],
+            ]
+        );
+
         // Logo Size
         $this->add_control(
             'logo_size',
@@ -43,14 +86,8 @@ class Exsit_Site_Logo extends Widget_Base {
                 'type'  => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
-                    'px' => [
-                        'min' => 10,
-                        'max' => 500,
-                    ],
-                    '%' => [
-                        'min' => 10,
-                        'max' => 100,
-                    ],
+                    'px' => ['min' => 10, 'max' => 500],
+                    '%'  => ['min' => 10, 'max' => 100],
                 ],
                 'default' => [
                     'unit' => '%',
@@ -93,9 +130,8 @@ class Exsit_Site_Logo extends Widget_Base {
             [
                 'label' => __('Logo Link', 'exsit-helper'),
                 'type'  => Controls_Manager::URL,
-                'placeholder' => __('https://your-link.com', 'exsit-helper'),
                 'default' => [
-                    'url' => home_url(),
+                    'url' => home_url('/'),
                 ],
             ]
         );
@@ -106,25 +142,49 @@ class Exsit_Site_Logo extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 
-        // Get logo
-        $logo_id  = get_theme_mod('custom_logo');
-        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
+        // Default logo (Customizer)
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $default_logo   = wp_get_attachment_image_url($custom_logo_id, 'full');
 
-        // Link settings
+        // Light logo
+        if ($settings['logo_type'] === 'custom' && !empty($settings['image']['url'])) {
+            $light_logo = $settings['image']['url'];
+        } else {
+            $light_logo = $default_logo;
+        }
+
+        // Dark logo
+        $dark_logo = !empty($settings['dark_logo']['url']) ? $settings['dark_logo']['url'] : '';
+
+        // Link
         $link     = !empty($settings['logo_link']['url']) ? $settings['logo_link']['url'] : home_url('/');
         $target   = !empty($settings['logo_link']['is_external']) ? ' target="_blank" rel="noopener"' : '';
         $nofollow = !empty($settings['logo_link']['nofollow']) ? ' rel="nofollow"' : '';
 
-        // Logo size safety
+        // Size
         $width = !empty($settings['logo_size']['size']) ? $settings['logo_size']['size'] : 100;
         $unit  = !empty($settings['logo_size']['unit']) ? $settings['logo_size']['unit'] : '%';
 
-        echo '<a class="exsit-site-logo navbar-brand light-logo logo position-relative" href="' . esc_url($link) . '"' . $target . $nofollow . '>';
+        echo '<a class="exsit-site-logo navbar-brand logo position-relative" href="' . esc_url($link) . '"' . $target . $nofollow . '>';
 
-        if (has_custom_logo() && $logo_url) {
-            echo '<img src="' . esc_url($logo_url) . '" 
+        if (!empty($light_logo)) {
+
+            $light_class = !empty($dark_logo) ? 'light-logo' : '';
+
+            // Light Logo
+            echo '<img class="' . esc_attr($light_class) . '" 
+                        src="' . esc_url($light_logo) . '" 
                         alt="' . esc_attr(get_bloginfo('name')) . '" 
                         style="width:' . esc_attr($width . $unit) . ';">';
+
+            // Dark Logo
+            if (!empty($dark_logo)) {
+                echo '<img class="dark-logo" 
+                            src="' . esc_url($dark_logo) . '" 
+                            alt="' . esc_attr(get_bloginfo('name')) . '" 
+                            style="width:' . esc_attr($width . $unit) . ';">';
+            }
+
         } else {
             echo '<h1>' . esc_html(get_bloginfo('name')) . '</h1>';
         }
