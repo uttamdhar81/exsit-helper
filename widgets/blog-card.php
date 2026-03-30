@@ -161,7 +161,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                     ],
                     '%' => [
                         'min' => 10,
-                        'max' => 50,
+                        'max' => 100,
                     ],
                 ],
                 'default' => [
@@ -814,7 +814,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 $query->the_post(); ?>
 
                 <div class="col-lg-12 mb-4">
-                    <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-row gap-3 post-blog-card">
+                    <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-md-row flex-column gap-md-3 post-blog-card">
 
                         <?php if (has_post_thumbnail()): ?>
                             <div class="post-image scale-img overflow-hidden flex-shrink-0 overflow-hidden rounded-4">
