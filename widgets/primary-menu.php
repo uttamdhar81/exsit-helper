@@ -84,9 +84,8 @@ class Exsit_Primary_Menu extends Widget_Base {
         $navbar_class = ($menu_style === 'light') ? 'navbar-light' : 'navbar-dark';
 
         echo '<div class="menu-overlay"></div>';
-        echo '<div class="menu-block">';
         echo '<div class="menu-close"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>';
-
+        echo '<div class="menu-block">';
         echo '<nav class="navbar">';
         
         wp_nav_menu([
