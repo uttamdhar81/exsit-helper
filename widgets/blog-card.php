@@ -1044,11 +1044,11 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
                 <a href="<?php the_permalink(); ?>" class="post-style4-item d-block mb-3">
 
-                    <h4 class="post-style4-title mb-1">
+                    <h3 class="post-blog-title mb-1">
                         <?php the_title(); ?>
-                    </h4>
+                    </h3>
 
-                    <div class="post-style4-meta">
+                    <div class="post-blog-tag">
                         <span>
                             <?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?>
                         </span>
