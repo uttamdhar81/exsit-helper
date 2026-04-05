@@ -54,6 +54,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                     'style1' => __('Style 1', 'exsit-helper'),
                     'style2' => __('Style 2', 'exsit-helper'),
                     'style3' => __('Style 3', 'exsit-helper'),
+                    'style4' => __('Style 4', 'exsit-helper'),
                 ],
             ]
         );
@@ -616,6 +617,8 @@ class Exsit_Blog_Card_Widget extends Widget_Base
             $this->render_style2($settings);
         } elseif ($settings['layout_style'] === 'style3') {
             $this->render_style3($settings);
+        } elseif ($settings['layout_style'] === 'style4') {
+            $this->render_style4($settings); // 👈 ADD THIS
         } else {
             $this->render_style1($settings);
         }
@@ -1009,6 +1012,54 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                         <?php endif; ?>
                     </a>
                 </div>
+            <?php endwhile; ?>
+
+        </div>
+
+        <?php
+        wp_reset_postdata();
+    }
+
+    protected function render_style4($settings)
+    {
+        $args = [
+            'post_type' => 'post',
+            'posts_per_page' => $settings['posts_per_page'],
+            'orderby' => $settings['order_by'],
+            'order' => $settings['order'],
+            'post_status' => 'publish',
+        ];
+
+        $query = new WP_Query($args);
+
+        if (!$query->have_posts()) {
+            return;
+        }
+        ?>
+
+        <div class="post-style4-list">
+
+            <?php while ($query->have_posts()):
+                $query->the_post(); ?>
+
+                <a href="<?php the_permalink(); ?>" class="post-style4-item d-block mb-3">
+
+                    <h4 class="post-style4-title mb-1">
+                        <?php the_title(); ?>
+                    </h4>
+
+                    <div class="post-style4-meta">
+                        <span>
+                            <?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?>
+                        </span>
+                        <span class="mx-1">•</span>
+                        <span>
+                            <?php echo $this->get_read_time(); ?> min read
+                        </span>
+                    </div>
+
+                </a>
+
             <?php endwhile; ?>
 
         </div>
