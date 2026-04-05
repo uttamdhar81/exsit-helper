@@ -808,7 +808,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $wrapper_id = 'blog-wrapper-' . $this->get_id();
         ?>
 
-        <div class="row post-blog-wrapper post-blog-style2" id="<?php echo esc_attr($wrapper_id); ?>">
+        <div class="row post-blog-wrapper gy-4 post-blog-style2" id="<?php echo esc_attr($wrapper_id); ?>">
 
             <?php while ($query->have_posts()):
                 $query->the_post(); ?>
@@ -949,7 +949,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
         $wrapper_id = 'blog-wrapper-' . $this->get_id();
         ?>
 
-        <div class="row post-blog-wrapper" id="<?php echo esc_attr($wrapper_id); ?>">
+        <div class="row post-blog-wrapper gy-4" id="<?php echo esc_attr($wrapper_id); ?>">
 
             <?php while ($query->have_posts()):
                 $query->the_post(); ?>
