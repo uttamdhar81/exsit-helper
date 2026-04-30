@@ -24,12 +24,7 @@ if ( class_exists( 'CSF' ) ) {
                         'title'  => esc_html__( 'Shop Page', 'exsit-helper' ),
                         'fields' => array(
 
-                            array(
-                                'title'    => esc_html__( 'Shop Page Background', 'exsit-helper' ),
-                                'subtitle' => esc_html__( 'Add your shop page background image.', 'exsit-helper' ),
-                                'id'       => 'exsit_shop_bg',
-                                'type'     => 'media',
-                            ),
+                            
 
                             array(
                                 'id'       => 'exsit_woo_shoppage_sidebar',
@@ -53,7 +48,6 @@ if ( class_exists( 'CSF' ) ) {
                                     '2' => EXSIT_HELPER_URL . 'assets/image/2col.png',
                                     '3' => EXSIT_HELPER_URL . 'assets/image/3col.png',
                                     '4' => EXSIT_HELPER_URL . 'assets/image/4col.png',
-                                    '6' => EXSIT_HELPER_URL . 'assets/image/6col.png',
                                 ),
                                 'default'  => '4',
                             ),
@@ -141,44 +135,11 @@ if ( class_exists( 'CSF' ) ) {
                                     '2' => EXSIT_HELPER_URL . 'assets/image/2col.png',
                                     '3' => EXSIT_HELPER_URL . 'assets/image/3col.png',
                                     '4' => EXSIT_HELPER_URL . 'assets/image/4col.png',
-                                    '6' => EXSIT_HELPER_URL . 'assets/image/6col.png',
                                 ),
                                 'default' => '3',
                             ),
 
-                            array(
-                                'id'      => 'exsit_woo_upsellproduct_display',
-                                'type'    => 'switcher',
-                                'title'   => esc_html__( 'Upsell Products', 'exsit-helper' ),
-                                'default' => true,
-                                'on'      => esc_html__( 'Show', 'exsit-helper' ),
-                                'off'     => esc_html__( 'Hide', 'exsit-helper' ),
-                            ),
-
-                            array(
-                                'id'         => 'exsit_woo_upsellproduct_num',
-                                'type'       => 'text',
-                                'title'      => esc_html__( 'Upsell Products Number', 'exsit-helper' ),
-                                'default'    => 3,
-                                'dependency' => array( 'exsit_woo_upsellproduct_display', '==', true ),
-                            ),
-
-                            array(
-                                'id'      => 'exsit_woo_crosssellproduct_display',
-                                'type'    => 'switcher',
-                                'title'   => esc_html__( 'Cross-sell Products', 'exsit-helper' ),
-                                'default' => true,
-                                'on'      => esc_html__( 'Show', 'exsit-helper' ),
-                                'off'     => esc_html__( 'Hide', 'exsit-helper' ),
-                            ),
-
-                            array(
-                                'id'         => 'exsit_woo_crosssellproduct_num',
-                                'type'       => 'text',
-                                'title'      => esc_html__( 'Cross-sell Products Number', 'exsit-helper' ),
-                                'default'    => 3,
-                                'dependency' => array( 'exsit_woo_crosssellproduct_display', '==', true ),
-                            ),
+                            
 
                         ),
                     ),

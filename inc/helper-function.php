@@ -220,3 +220,116 @@ function exsit_load_more_posts()
     wp_die();
 }
 
+if ( !function_exists( 'get_exsit_url' ) ) {
+    function get_exsit_url() {
+        $url = 'http://uicobe.com/plugins/exsit-demo/';
+        return $url;
+    }
+}
+
+
+
+add_action('add_meta_boxes', 'exsit_add_blog_layout_meta_box');
+add_action('add_meta_boxes', 'exsit_add_product_layout_meta_box');
+
+add_action('save_post', 'exsit_save_product_layout_meta');
+add_action('save_post', 'exsit_save_blog_layout_meta');
+
+// ======================
+// BLOG META BOX
+// ======================
+
+function exsit_add_blog_layout_meta_box() {
+    add_meta_box(
+        'exsit_blog_layout',
+        esc_html__('Blog Layout', 'exsit'),
+        'exsit_blog_layout_meta_callback', // ✅ fixed name
+        'post',
+        'side',
+        'default'
+    );
+}
+
+function exsit_blog_layout_meta_callback($post) {
+
+    wp_nonce_field('exsit_blog_layout_nonce', 'exsit_blog_layout_nonce');
+
+    $value = get_post_meta($post->ID, '_exsit_blog_layout', true);
+    ?>
+    <select name="exsit_blog_layout" style="width:100%;">
+        <option value=""><?php esc_html_e('Default (Theme Option)', 'exsit'); ?></option>
+        <option value="left" <?php selected($value, 'left'); ?>><?php esc_html_e('Left Sidebar', 'exsit'); ?></option>
+        <option value="right" <?php selected($value, 'right'); ?>><?php esc_html_e('Right Sidebar', 'exsit'); ?></option>
+        <option value="none" <?php selected($value, 'none'); ?>><?php esc_html_e('No Sidebar', 'exsit'); ?></option>
+    </select>
+    <?php
+}
+
+function exsit_save_blog_layout_meta($post_id) {
+
+    if (!isset($_POST['exsit_blog_layout_nonce'])) return;
+
+    if (!wp_verify_nonce($_POST['exsit_blog_layout_nonce'], 'exsit_blog_layout_nonce')) return;
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['exsit_blog_layout'])) {
+        update_post_meta(
+            $post_id,
+            '_exsit_blog_layout',
+            sanitize_text_field($_POST['exsit_blog_layout'])
+        );
+    }
+}
+
+
+// ======================
+// PRODUCT META BOX
+// ======================
+
+function exsit_add_product_layout_meta_box() {
+    add_meta_box(
+        'exsit_product_layout',
+        esc_html__('Product Layout', 'exsit'),
+        'exsit_product_layout_meta_callback',
+        'product',
+        'side',
+        'default'
+    );
+}
+
+function exsit_product_layout_meta_callback($post) {
+
+    wp_nonce_field('exsit_product_layout_nonce', 'exsit_product_layout_nonce');
+
+    $value = get_post_meta($post->ID, '_exsit_product_layout', true);
+    ?>
+    <select name="exsit_product_layout" style="width:100%;">
+        <option value=""><?php esc_html_e('Default (Theme Option)', 'exsit'); ?></option>
+        <option value="layout1" <?php selected($value, 'layout1'); ?>>Layout 1</option>
+        <option value="layout2" <?php selected($value, 'layout2'); ?>>Layout 2</option>
+        <option value="layout3" <?php selected($value, 'layout3'); ?>>Layout 3</option>
+    </select>
+    <?php
+}
+
+function exsit_save_product_layout_meta($post_id) {
+
+    if (!isset($_POST['exsit_product_layout_nonce'])) return;
+
+    if (!wp_verify_nonce($_POST['exsit_product_layout_nonce'], 'exsit_product_layout_nonce')) return;
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['exsit_product_layout'])) {
+        update_post_meta(
+            $post_id,
+            '_exsit_product_layout',
+            sanitize_text_field($_POST['exsit_product_layout'])
+        );
+    }
+}

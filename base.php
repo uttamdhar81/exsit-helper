@@ -129,7 +129,7 @@ final class Base {
         }
 
         $settings_files = [
-            'preloader.php', 'logo.php', 'header.php', 'footer.php',
+            'preloader.php', 'logo.php', 'footer.php',
             'blog.php', 'page.php', '404page.php',
             'woocommerce.php', 'customcss.php', 'backup.php'
         ];

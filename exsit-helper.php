@@ -33,6 +33,8 @@ add_action( 'after_setup_theme', function() {
 		require_once EXSIT_HELPER_INC . 'helper-function.php';
 	}
 
+	require_once EXSIT_HELPER_INC . 'demo-data/demo-import.php';
+
 });
 
 /**
