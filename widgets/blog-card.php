@@ -821,7 +821,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
 
                         <?php if (has_post_thumbnail()): ?>
                             <div class="post-image scale-img overflow-hidden flex-shrink-0 overflow-hidden rounded-4">
-                                <?php the_post_thumbnail($settings['image_size'], [
+                                <?php the_post_thumbnail('exsit-small-blog', [
                                     'class' => 'w-100 h-100 d-block object-fit-cover',
                                     'loading' => 'lazy'
                                 ]); ?>
