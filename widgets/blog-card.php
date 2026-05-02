@@ -819,12 +819,21 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 <div class="col-lg-12 mb-4">
                     <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-md-row flex-column gap-4 post-blog-card">
 
-                        <?php if (has_post_thumbnail()): ?>
-                            <div class="post-image scale-img overflow-hidden flex-shrink-0 overflow-hidden rounded-4">
-                                <?php the_post_thumbnail('exsit-small-blog', [
-                                    'class' => 'w-100 h-100 d-block object-fit-cover',
-                                    'loading' => 'lazy'
-                                ]); ?>
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <div class="post-image scale-img overflow-hidden flex-shrink-0 rounded-4">
+                                <?php
+                                echo wp_get_attachment_image(
+                                    get_post_thumbnail_id(),
+                                    'exsit-small-blog',
+                                    false,
+                                    [
+                                        'class'   => 'w-100 h-100 d-block object-fit-cover',
+                                        'loading' => 'lazy',
+                                        'srcset'  => false,
+                                        'sizes'   => false,
+                                    ]
+                                );
+                                ?>
                             </div>
                         <?php endif; ?>
 
