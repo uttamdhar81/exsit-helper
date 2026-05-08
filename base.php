@@ -21,7 +21,7 @@ final class Base {
         add_action( 'after_setup_theme', [ $this, 'load_settings' ] );
         add_action( 'init', [ $this, 'load_textdomain' ] );
         add_action( 'plugins_loaded', [ $this, 'init' ] );
-        add_action( 'admin_menu', [ $this, 'register_theme_admin_menu' ] );
+        // add_action( 'admin_menu', [ $this, 'register_theme_admin_menu' ] );
     }
 
     public function init() {

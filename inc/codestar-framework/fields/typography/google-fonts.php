@@ -657,7 +657,6 @@ if ( ! function_exists( 'csf_get_google_fonts' ) ) {
       'Ledger'=>[['normal'],['cyrillic','latin','latin-ext']],
       'Lekton'=>[['normal','italic','700'],['latin','latin-ext']],
       'Lemon'=>[['normal'],['latin']],
-      'Lemlonyo'=>[['300','normal','500','600','700'],['arabic','latin','latin-ext','vietnamese']],
       'Lexend'=>[['100','200','300','normal','500','600','700','800','900'],['latin','latin-ext','vietnamese']],
       'Lexend Deca'=>[['100','200','300','normal','500','600','700','800','900'],['latin','latin-ext','vietnamese']],
       'Lexend Exa'=>[['100','200','300','normal','500','600','700','800','900'],['latin','latin-ext','vietnamese']],

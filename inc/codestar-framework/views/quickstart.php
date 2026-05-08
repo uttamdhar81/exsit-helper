@@ -10,18 +10,18 @@ if ( class_exists( 'CSF' ) ) {
 
   <span>//</span>
   <span>// Set a unique slug-like ID</span>
-  $lonyo = 'my_framework';
+  $exsit = 'my_framework';
 
   <span>//</span>
   <span>// Create options</span>
-  CSF::createOptions( $lonyo, array(
+  CSF::createOptions( $exsit, array(
     'menu_title' => 'My Framework',
     'menu_slug'  => 'my-framework',
   ) );
 
   <span>//</span>
   <span>// Create a section</span>
-  CSF::createSection( $lonyo, array(
+  CSF::createSection( $exsit, array(
     'title'  => 'Tab Title 1',
     'fields' => array(
 
@@ -36,7 +36,7 @@ if ( class_exists( 'CSF' ) ) {
     )
   ) );
 
-  CSF::createSection( $lonyo, array(
+  CSF::createSection( $exsit, array(
     'title'  => 'Tab Title 2',
     'fields' => array(
 

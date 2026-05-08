@@ -81,11 +81,11 @@ if ( ! class_exists( 'CSF_Field_dimensions' ) ) {
 
       $output    = '';
       $element   = ( is_array( $this->field['output'] ) ) ? join( ',', $this->field['output'] ) : $this->field['output'];
-      $lonyo    = ( ! empty( $this->field['output_lonyo'] ) ) ? $this->field['output_lonyo'] .'-' : '';
+      $exsit    = ( ! empty( $this->field['output_exsit'] ) ) ? $this->field['output_exsit'] .'-' : '';
       $important = ( ! empty( $this->field['output_important'] ) ) ? '!important' : '';
       $unit      = ( ! empty( $this->value['unit'] ) ) ? $this->value['unit'] : 'px';
-      $width     = ( isset( $this->value['width'] ) && $this->value['width'] !== '' ) ? $lonyo .'width:'. $this->value['width'] . $unit . $important .';' : '';
-      $height    = ( isset( $this->value['height'] ) && $this->value['height'] !== '' ) ? $lonyo .'height:'. $this->value['height'] . $unit . $important .';' : '';
+      $width     = ( isset( $this->value['width'] ) && $this->value['width'] !== '' ) ? $exsit .'width:'. $this->value['width'] . $unit . $important .';' : '';
+      $height    = ( isset( $this->value['height'] ) && $this->value['height'] !== '' ) ? $exsit .'height:'. $this->value['height'] . $unit . $important .';' : '';
 
       if ( $width !== '' || $height !== '' ) {
         $output = $element .'{'. $width . $height .'}';

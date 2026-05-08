@@ -121,9 +121,6 @@ msgstr "Adicionar novo"
 msgid "Error: Invalid nonce verification."
 msgstr "Erro: Verificação nonce inválida."
 
-#: fields/background/background.php:35 fields/media/media.php:57
-msgid "Not selected"
-msgstr "Não selecilonyo"
 
 #: fields/background/background.php:66 fields/date/date.php:31
 msgid "From"

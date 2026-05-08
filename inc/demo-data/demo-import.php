@@ -24,7 +24,7 @@ add_filter( 'pt-ocdi/import_files', 'exsit_import_files' );
 // demo import setup
 function exsit_after_import_setup() {
 
-    // ✅ Assign Menu
+    //  Assign Menu
     $main_menu = get_term_by( 'slug', 'primary', 'nav_menu' );
 
     if ( $main_menu && ! is_wp_error( $main_menu ) ) {
@@ -36,7 +36,7 @@ function exsit_after_import_setup() {
         set_theme_mod( 'nav_menu_locations', $locations );
     }
 
-    // ✅ Assign Front Page
+    // Assign Front Page
     $front_page = get_page_by_path( 'tech-agency' );
 
     if ( $front_page && ! is_wp_error( $front_page ) ) {
@@ -52,7 +52,7 @@ function exsit_after_import_setup() {
         \Elementor\Utils::replace_urls($old_url, $new_url);
     }
 
-    // ✅ Permalinks
+    //  Permalinks
     update_option( 'permalink_structure', '/%postname%/' );
     flush_rewrite_rules();
 

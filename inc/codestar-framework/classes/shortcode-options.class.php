@@ -188,7 +188,7 @@ if ( ! class_exists( 'CSF_Shortcoder' ) ) {
               if ( in_array( $field['type'], $unallows ) ) { $field['_notice'] = true; }
 
               // Extra tag improves for spesific fields (border, spacing, dimensions etc...)
-              $field['tag_lonyo'] = ( ! empty( $field['tag_lonyo'] ) ) ? $field['tag_lonyo'] .'_' : '';
+              $field['tag_exsit'] = ( ! empty( $field['tag_exsit'] ) ) ? $field['tag_exsit'] .'_' : '';
 
               $field_default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
 
@@ -223,7 +223,7 @@ if ( ! class_exists( 'CSF_Shortcoder' ) ) {
                   if ( in_array( $field['type'], $unallows ) ) { $field['_notice'] = true; }
 
                   // Extra tag improves for spesific fields (border, spacing, dimensions etc...)
-                  $field['tag_lonyo'] = ( ! empty( $field['tag_lonyo'] ) ) ? $field['tag_lonyo'] .'_' : '';
+                  $field['tag_exsit'] = ( ! empty( $field['tag_exsit'] ) ) ? $field['tag_exsit'] .'_' : '';
 
                   $field_default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
 

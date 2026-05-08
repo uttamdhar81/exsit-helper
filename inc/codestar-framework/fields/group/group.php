@@ -21,20 +21,20 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
         'min'                       => 0,
         'fields'                    => array(),
         'button_title'              => esc_html__( 'Add New', 'csf' ),
-        'accordion_title_lonyo'    => '',
+        'accordion_title_exsit'    => '',
         'accordion_title_number'    => false,
         'accordion_title_auto'      => true,
         'accordion_title_by'        => array(),
-        'accordion_title_by_lonyo' => ' ',
+        'accordion_title_by_exsit' => ' ',
       ) );
 
-      $title_lonyo    = ( ! empty( $args['accordion_title_lonyo'] ) ) ? $args['accordion_title_lonyo'] : '';
+      $title_exsit    = ( ! empty( $args['accordion_title_exsit'] ) ) ? $args['accordion_title_exsit'] : '';
       $title_number    = ( ! empty( $args['accordion_title_number'] ) ) ? true : false;
       $title_auto      = ( ! empty( $args['accordion_title_auto'] ) ) ? true : false;
       $title_first     = ( isset( $this->field['fields'][0]['id'] ) ) ? $this->field['fields'][0]['id'] : $this->field['fields'][1]['id'];
       $title_by        = ( is_array( $args['accordion_title_by'] ) ) ? $args['accordion_title_by'] : (array) $args['accordion_title_by'];
       $title_by        = ( empty( $title_by ) ) ? array( $title_first ) : $title_by;
-      $title_by_lonyo = ( ! empty( $args['accordion_title_by_lonyo'] ) ) ? $args['accordion_title_by_lonyo'] : '';
+      $title_by_exsit = ( ! empty( $args['accordion_title_by_exsit'] ) ) ? $args['accordion_title_by_exsit'] : '';
 
       if ( preg_match( '/'. preg_quote( '['. $this->field['id'] .']' ) .'/', $this->unique ) ) {
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
           echo '<h4 class="csf-cloneable-title">';
           echo '<span class="csf-cloneable-text">';
           echo ( $title_number ) ? '<span class="csf-cloneable-title-number"></span>' : '';
-          echo ( $title_lonyo ) ? '<span class="csf-cloneable-title-lonyo">'. esc_attr( $title_lonyo ) .'</span>' : '';
+          echo ( $title_exsit ) ? '<span class="csf-cloneable-title-exsit">'. esc_attr( $title_exsit ) .'</span>' : '';
           echo ( $title_auto ) ? '<span class="csf-cloneable-value"><span class="csf-cloneable-placeholder"></span></span>' : '';
           echo '</span>';
           echo '</h4>';
@@ -73,7 +73,7 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
 
         echo '</div>';
 
-        echo '<div class="csf-cloneable-wrapper csf-data-wrapper" data-title-by="'. esc_attr( json_encode( $title_by ) ) .'" data-title-by-lonyo="'. esc_attr( $title_by_lonyo ) .'" data-title-number="'. esc_attr( $title_number ) .'" data-field-id="['. esc_attr( $this->field['id'] ) .']" data-max="'. esc_attr( $args['max'] ) .'" data-min="'. esc_attr( $args['min'] ) .'">';
+        echo '<div class="csf-cloneable-wrapper csf-data-wrapper" data-title-by="'. esc_attr( json_encode( $title_by ) ) .'" data-title-by-exsit="'. esc_attr( $title_by_exsit ) .'" data-title-number="'. esc_attr( $title_number ) .'" data-field-id="['. esc_attr( $this->field['id'] ) .']" data-max="'. esc_attr( $args['max'] ) .'" data-min="'. esc_attr( $args['min'] ) .'">';
 
         if ( ! empty( $this->value ) ) {
 
@@ -93,7 +93,7 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
                 }
               }
 
-              $title = join( $title_by_lonyo, $titles );
+              $title = join( $title_by_exsit, $titles );
 
             }
 
@@ -110,7 +110,7 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
               echo '<h4 class="csf-cloneable-title">';
               echo '<span class="csf-cloneable-text">';
               echo ( $title_number ) ? '<span class="csf-cloneable-title-number">'. esc_attr( $num+1 ) .'.</span>' : '';
-              echo ( $title_lonyo ) ? '<span class="csf-cloneable-title-lonyo">'. esc_attr( $title_lonyo ) .'</span>' : '';
+              echo ( $title_exsit ) ? '<span class="csf-cloneable-title-exsit">'. esc_attr( $title_exsit ) .'</span>' : '';
               echo ( $title_auto ) ? '<span class="csf-cloneable-value">' . esc_attr( $title ) .'</span>' : '';
               echo '</span>';
               echo '</h4>';

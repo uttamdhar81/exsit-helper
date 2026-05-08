@@ -24,7 +24,6 @@
   <li>Added: Number field "min", "max", "step" options.</li>
   <li>Updated: Google Web Fonts array added new fonts.</li>
   <li>Updated: JS libraries (codemirror, leaflet, etc).</li>
-  <li>Improved: Group field "custom title and lonyo" option (samples added).</li>
   <li>Improved: Some JS and CSS coding.</li>
 </ul>
 
@@ -121,7 +120,6 @@
   <li>Fixed: Sortable field append new fields after saved issue.</li>
   <li>Fixed: Customizer dependency issue after v2.1.6 update.</li>
   <li>Fixed: Typography field "Normal 400" style embed issue.</li>
-  <li>Updated: Assets library (csf.css to style.css, csf.js to main.js).</li>
   <li>Improved: Sanitize/Validate callback method.</li>
   <li>Improved: Global dependency feature.</li>
   <li>Improved: Usage anywhere framework fields.</li>

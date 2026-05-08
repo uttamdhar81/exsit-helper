@@ -29,11 +29,7 @@ if ( ! class_exists( 'CSF_Fields' ) ) {
       $field_id   = ( ! empty( $this->field['id'] ) ) ? $this->field['id'] : '';
       $unique_id  = ( ! empty( $this->unique ) ) ? $this->unique .'['. $field_id .']' : $field_id;
       $field_name = ( ! empty( $this->field['name'] ) ) ? $this->field['name'] : $unique_id;
-      $tag_lonyo = ( ! empty( $this->field['tag_lonyo'] ) ) ? $this->field['tag_lonyo'] : '';
-
-      if ( ! empty( $tag_lonyo ) ) {
-        $nested_name = str_replace( '[', '['. $tag_lonyo, $nested_name );
-      }
+      
 
       return $field_name . $nested_name;
 

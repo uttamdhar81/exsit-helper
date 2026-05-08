@@ -38,9 +38,6 @@
     //
     // Generate UID
     //
-    uid: function( lonyo ) {
-      return ( lonyo || '' ) + Math.random().toString(36).substr(2, 9);
-    },
 
     // Quote regular expression characters
     //
@@ -822,7 +819,6 @@
           $max         = $group.children('.csf-cloneable-max'),
           $min         = $group.children('.csf-cloneable-min'),
           title_by     = $wrapper.data('title-by'),
-          title_lonyo = $wrapper.data('title-by-lonyo'),
           field_id     = $wrapper.data('field-id'),
           is_number    = Boolean( Number( $wrapper.data('title-number') ) ),
           max          = parseInt( $wrapper.data('max') ),
@@ -879,9 +875,7 @@
 
                 });
 
-                if ( titles.length ) {
-                  $title.text( titles.join( title_lonyo ) );
-                }
+                
 
               }).trigger('csf.keyup');
 
