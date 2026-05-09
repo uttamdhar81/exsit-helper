@@ -38,6 +38,9 @@
     //
     // Generate UID
     //
+    uid: function( exsit ) {
+      return ( exsit || '' ) + Math.random().toString(36).substr(2, 9);
+    },
 
     // Quote regular expression characters
     //
@@ -819,6 +822,7 @@
           $max         = $group.children('.csf-cloneable-max'),
           $min         = $group.children('.csf-cloneable-min'),
           title_by     = $wrapper.data('title-by'),
+          title_exsit = $wrapper.data('title-by-exsit'),
           field_id     = $wrapper.data('field-id'),
           is_number    = Boolean( Number( $wrapper.data('title-number') ) ),
           max          = parseInt( $wrapper.data('max') ),
@@ -875,7 +879,9 @@
 
                 });
 
-                
+                if ( titles.length ) {
+                  $title.text( titles.join( title_exsit ) );
+                }
 
               }).trigger('csf.keyup');
 

@@ -16,7 +16,7 @@ if ( class_exists( 'CSF' ) ) {
         'menu_title'         => esc_html__( 'Exsit Theme', 'exsit-helper' ),
         'menu_slug'          => 'exsit-theme-option',
         'menu_type'          => 'menu',
-        'menu_icon'          => 'dashicons-welcome-widgets-menus',
+        'menu_icon'          => 'dashicons-admin-tools',
         'menu_capability'    => 'manage_options',
         'menu_position'      => 30,
 

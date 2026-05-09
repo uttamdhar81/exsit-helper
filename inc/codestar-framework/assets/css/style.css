@@ -1323,7 +1323,7 @@
   padding: 0;
   border-top: 0;
 }
-
+.csf-field-group .csf-cloneable-title-exsit,
 .csf-field-group .csf-cloneable-title-number {
   margin-right: 5px;
 }
