@@ -1,15 +1,19 @@
 <?php
 // Do not allow directly accessing this file.
 if ( ! defined( 'ABSPATH' ) ) {
-    exit( );
+    exit();
 }
 
+/**
+ * Demo Import Files
+ */
 function exsit_import_files() {
 
     return array(
         array(
-            'import_file_name' => esc_html__('Exsit Demo', 'exsit-helper'),
+            'import_file_name'  => esc_html__( 'Exsit Demo', 'exsit-helper' ),
             'local_import_file' => EXSIT_HELPER_INC . '/demo-data/exsit-demo.xml',
+
             'local_import_json' => array(
                 array(
                     'file_path'   => EXSIT_HELPER_INC . '/demo-data/theme-settings.json',
@@ -19,15 +23,21 @@ function exsit_import_files() {
         ),
     );
 }
-add_filter( 'pt-ocdi/import_files', 'exsit_import_files' );
+add_filter( 'ocdi/import_files', 'exsit_import_files' );
 
-// demo import setup
+
+/**
+ * After Import Setup
+ */
 function exsit_after_import_setup() {
 
-    //  Assign Menu
+    /**
+     * Assign Menu
+     */
     $main_menu = get_term_by( 'slug', 'primary', 'nav_menu' );
 
     if ( $main_menu && ! is_wp_error( $main_menu ) ) {
+
         $locations = get_theme_mod( 'nav_menu_locations', array() );
 
         $locations['primary-menu'] = $main_menu->term_id;
@@ -36,41 +46,56 @@ function exsit_after_import_setup() {
         set_theme_mod( 'nav_menu_locations', $locations );
     }
 
-    // Assign Front Page
+
+    /**
+     * Assign Front Page
+     */
     $front_page = get_page_by_path( 'tech-agency' );
 
     if ( $front_page && ! is_wp_error( $front_page ) ) {
+
         update_option( 'show_on_front', 'page' );
         update_option( 'page_on_front', $front_page->ID );
     }
 
-    // Define the old and new URLs
-    $old_url = 'https://uicobe.com/theme/exsit'; // Replace with your old/static URL
-    $new_url = esc_url( home_url( '/' ) ); // get current home url
-    
-    if (class_exists('\Elementor\Utils')) {
-        \Elementor\Utils::replace_urls($old_url, $new_url);
+
+    /**
+     * Replace Elementor URLs
+     */
+    $old_url = 'https://uicobe.com/theme/exsit';
+    $new_url = esc_url( home_url( '/' ) );
+
+    if ( class_exists( '\Elementor\Utils' ) ) {
+        \Elementor\Utils::replace_urls( $old_url, $new_url );
     }
 
-    //  Permalinks
-    update_option( 'permalink_structure', '/%postname%/' );
-    flush_rewrite_rules();
 
-    add_action( 'shutdown', function() {
+    /**
+     * Elementor Settings
+     */
+    if ( class_exists( '\Elementor\Plugin' ) ) {
 
-        if ( class_exists( '\Elementor\Plugin' ) ) {
+        // Enable Elementor support for pages/posts if missing
+        $elementor_cpt_support = get_option( 'elementor_cpt_support', array() );
 
-            // Clear CSS & regenerate
-            \Elementor\Plugin::$instance->files_manager->clear_cache();
+        if ( empty( $elementor_cpt_support ) ) {
 
-            // Sync templates
-            \Elementor\Plugin::$instance->templates_manager
-                ->get_source( 'local' )
-                ->sync_items();
+            update_option(
+                'elementor_cpt_support',
+                array( 'page', 'post' )
+            );
         }
 
-    });
+        // Clear Elementor cache
+        \Elementor\Plugin::$instance->files_manager->clear_cache();
+    }
 
+
+    /**
+     * Permalinks
+     */
+    update_option( 'permalink_structure', '/%postname%/' );
+    flush_rewrite_rules();
 }
 
-add_action( 'pt-ocdi/after_import', 'exsit_after_import_setup' );
+add_action( 'ocdi/after_import', 'exsit_after_import_setup' );

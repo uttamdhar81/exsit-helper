@@ -91,6 +91,75 @@
 
             }
         );
+        
+        // Feature Slider
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/exsit_feature_slider.default',
+            function ($scope, $) {
+
+                let $mainSlider = $scope.find('.exsit-feature-slider-main');
+                let $navSlider  = $scope.find('.exsit-feature-slider-nav');
+
+                /*
+                |--------------------------------------------------------------------------
+                | MAIN SLIDER
+                |--------------------------------------------------------------------------
+                */
+
+                if ($mainSlider.hasClass('slick-initialized')) {
+                    $mainSlider.slick('unslick');
+                }
+
+                $mainSlider.slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    fade: true,
+                    arrows: $mainSlider.data('arrows'),
+                    dots: $mainSlider.data('dots'),
+                    autoplay: $mainSlider.data('autoplay'),
+                    adaptiveHeight: true,
+                    asNavFor: $navSlider,
+                    draggable: false,
+                    swipe: false,
+                    touchMove: false
+                });
+
+                /*
+                |--------------------------------------------------------------------------
+                | NAVIGATION SLIDER
+                |--------------------------------------------------------------------------
+                */
+
+                if ($navSlider.hasClass('slick-initialized')) {
+                    $navSlider.slick('unslick');
+                }
+
+                $navSlider.slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    asNavFor: $mainSlider,
+                    focusOnSelect: true,
+                    arrows: false,
+                    dots: false,
+                    centerMode: false,
+                    responsive: [
+                        {
+                            breakpoint: 991,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 767,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+
+            }
+        );
 
         elementorFrontend.hooks.addAction(
             'frontend/element_ready/exsit_feedback_slider.default',
