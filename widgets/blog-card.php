@@ -817,7 +817,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                 $query->the_post(); ?>
 
                 <div class="col-lg-12 mb-4">
-                    <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-md-row flex-column gap-4 post-blog-card">
+                    <a href="<?php the_permalink(); ?>" class="rounded-4 overflow-hidden d-flex flex-md-row flex-column post-blog-card">
 
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="post-image scale-img overflow-hidden flex-shrink-0 rounded-4">
@@ -837,7 +837,7 @@ class Exsit_Blog_Card_Widget extends Widget_Base
                             </div>
                         <?php endif; ?>
 
-                        <div class="post-content d-flex flex-column p-3 ps-0 bg-white overflow-hidden z-5">
+                        <div class="post-content d-flex flex-column p-3 bg-white overflow-hidden z-5">
 
                             <div class="post-blog-tag d-flex flex-row">
                                 <span><?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?></span>
